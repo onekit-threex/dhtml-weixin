@@ -1,3 +1,6 @@
 export default function cancelAnimationFrame(requestId,canvas) {
-  (canvas || getApp().canvas).cancelAnimationFrame(requestId)
+  if(canvas && canvas.wx_element){
+    canvas = canvas.wx_element
+  }
+  (canvas || (getApp().canvas)).cancelAnimationFrame(requestId)
 }
