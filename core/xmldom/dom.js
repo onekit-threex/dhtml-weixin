@@ -788,6 +788,7 @@ Element.prototype = {
     })
   }
 }
+
 Document.prototype.getElementsByTagName = Element.prototype.getElementsByTagName
 Document.prototype.getElementsByTagNameNS = Element.prototype.getElementsByTagNameNS
 Element.prototype.querySelectorAll = function (selector) {
@@ -1180,6 +1181,35 @@ function __set__(object, key, value) {
 // do dynamic
 try {
   if (Object.defineProperty) {
+    Object.defineProperty(Element.prototype, 'outerHTML', {
+      get() {
+        return new XMLSerializer().serializeToString(this)
+      },
+      set(){
+
+      }
+    })
+    Object.defineProperty(Element.prototype, 'innerHTML', {
+      get() {
+        var html = new XMLSerializer().serializeToString(this)
+        html = html.substring(html.indexOf(">"))
+        html = html.substring(0,html.lastIndexOf("</"))
+        return html
+      },
+      set(){
+
+      }
+    })
+    Object.defineProperty(Element.prototype, 'firstElementChild', {
+      get() {
+        return this.firstChild
+      }
+    })
+    Object.defineProperty(Element.prototype, 'nextElementSibling', {
+      get() {
+        return this.nextSibling
+      }
+    })
     Object.defineProperty(LiveNodeList.prototype, 'length', {
       get() {
         _updateLiveList(this)
