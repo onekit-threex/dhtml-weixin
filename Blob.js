@@ -4,4 +4,7 @@ export default class Blob {
     this.array = array
     this.options = options
   }
+  get size(){
+    return this.array[0].length
+  }
 }
