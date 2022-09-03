@@ -11,7 +11,10 @@ import EventTarget from './EventTarget'
 import Style from './Style'
 import Element from './Element'
 import ClassCollection from './ClassCollection'
-
+function getPage(){
+  const pages = getCurrentPages()
+  return pages[pages.length-1]
+}
 class HTMLElement extends Element {
   constructor(wx_element) {
     super()
@@ -32,6 +35,19 @@ class HTMLElement extends Element {
 
   get children() {
     return this._children
+  }
+  set innerHTML(innerHTML){
+    innerHTML = innerHTML.replaceAll("<br/>","\n")
+    innerHTML = innerHTML.replaceAll("<br>","\n")
+    innerHTML = innerHTML.replaceAll("&nbsp;"," ")
+    const page = getPage();
+    const key = `${this.id}_innerHTML`
+    const data = {}
+    data[key] =  innerHTML
+    page.setData(data)
+  }
+  get innerHTML(){
+    return this._innerHTML
   }
   append() {
 

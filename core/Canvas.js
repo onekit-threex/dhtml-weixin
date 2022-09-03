@@ -1,6 +1,6 @@
 export default class Canvas{
     
-    static canvas2image(canvas3d, canvas2d) {
+    static canvas2image(canvas3d, canvas2d=getApp().canvas2d) {
         if(canvas3d.wx_element){
             canvas3d = canvas3d.wx_element
         }
