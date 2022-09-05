@@ -22,7 +22,8 @@ import EventTarget from "./EventTarget"
 import Element from "./Element"
 import Node from "./Node"
 import Event from "./Event"
-
+import Performance from "./Performance"
+const performance = new Performance()
 const document = new Document()
 const window = new Window()
 const self = window
@@ -31,6 +32,7 @@ module.exports = {
   Blob,
   createImageBitmap,
   CSSStyleDeclaration,
+  performance,
   document,
   DOMParser,
   EventTarget,
