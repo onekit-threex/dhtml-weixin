@@ -5,7 +5,7 @@ import CSSStyleDeclaration from "./CSSStyleDeclaration"
 import Document from './document'
 import fetch from './fetch'
 import Headers from './Headers'
-import Image from './Image'
+import HTMLImageElement from './HTMLImageElement'
 import navigator from './navigator'
 import Request from './Request'
 import requestAnimationFrame from "./requestAnimationFrame"
@@ -39,7 +39,7 @@ module.exports = {
   Element,
   fetch,
   Headers,
-  Image,
+  HTMLImageElement,
   location,
   navigator,
   Node,

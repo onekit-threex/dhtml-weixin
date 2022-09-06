@@ -6,7 +6,7 @@
 import EventTarget from './EventTarget'
 import Base64  from "./core/Base64"
 
-export default class Image extends EventTarget {
+export default class HTMLImageElement extends EventTarget {
   constructor() {
     super()
     const canvas = getApp().canvas

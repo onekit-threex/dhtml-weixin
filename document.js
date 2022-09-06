@@ -3,7 +3,7 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-console */
-import Image from './Image'
+import HTMLImageElement from './HTMLImageElement'
 import Window from './window'
 import Location from './Location'
 import EventTarget from './EventTarget'
@@ -183,7 +183,7 @@ export default class Document extends EventTarget {
       case 'canvas':
         return wx.createOffscreenCanvas({ type: canvasType })
       case 'img':
-        return new Image()
+        return new HTMLImageElement()
       default:
         return new HTMLElement()
     }
