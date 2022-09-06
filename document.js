@@ -37,6 +37,9 @@ class HTMLElement extends Element {
     return this._children
   }
   set innerHTML(innerHTML){
+    if(typeof innerHTML!="string"){
+      return
+    }
     innerHTML = innerHTML.replaceAll("<br/>","\n")
     innerHTML = innerHTML.replaceAll("<br>","\n")
     innerHTML = innerHTML.replaceAll("&nbsp;"," ")

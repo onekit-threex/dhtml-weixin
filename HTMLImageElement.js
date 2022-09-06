@@ -13,27 +13,38 @@ export default class HTMLImageElement extends EventTarget {
     this.wx_image = canvas.createImage()
     this.wx_image.onload = () => {
       if (this.onload) {
-        this.onload.call(this.wx_image, this.wx_image)
+        this.onload.call(this, e)
       }
       if (this._all_event_handlers.load) {
         this._all_event_handlers.load.forEach(handler => {
-          handler.call(this.wx_image, this.wx_image)
+          handler.call(this)
         })
       }
     }
     this.wx_image.onerror = (e) => {
       if (this.onerror) {
-        this.onerror.call(this.wx_image, e)
+        this.onerror.call(this, e)
       }
       if (this._all_event_handlers.error) {
         this._all_event_handlers.error.forEach(handler => {
-          handler.call(this.wx_image, e)
+          handler.call(this, e)
         })
       }
     }
     this.onekit_image = this
   }
-
+  get width() {
+    return this.wx_image.width
+  }
+  get height() {
+    return this.wx_image.height
+  }
+  get data() {
+    return this.wx_image.data
+  }
+  get complete() {
+    return this.wx_image.complete
+  }
   set crossOrigin(crossOrigin) {
     this._crossOrigin = crossOrigin
   }
