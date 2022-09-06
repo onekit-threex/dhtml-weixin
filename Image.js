@@ -44,7 +44,7 @@ export default class Image extends EventTarget {
 
   set src(src) {
     if(getApp().onekit_debug){
-      console[getApp().onekit_debug]('[Image]', src)
+      console[getApp().onekit_debug]('[image]', src)
     }
     this._src = src
 
