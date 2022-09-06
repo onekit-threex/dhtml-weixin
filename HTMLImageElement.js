@@ -13,7 +13,7 @@ export default class HTMLImageElement extends EventTarget {
     this.wx_image = canvas.createImage()
     this.wx_image.onload = () => {
       if (this.onload) {
-        this.onload.call(this, e)
+        this.onload.call(this)
       }
       if (this._all_event_handlers.load) {
         this._all_event_handlers.load.forEach(handler => {
