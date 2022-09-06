@@ -1,19 +1,22 @@
-import GUID from './core/GUID'
+import GUID from "./core/GUID";
 
 export default class URL {
-  static createObjectURL(blob) {
-    const url = `blob:http://localhost/${GUID()}`
-    if (!getApp().ObjectURL) {
-      getApp().ObjectURL = {}
-    }
-    if(getApp().onekit_debug){
-      console[getApp().onekit_debug]("[createObjectURL]"+url)
-    }
-    getApp().ObjectURL[url] = blob
-    return url
-  }
+	static createObjectURL(blob) {
+		const guid = GUID();
+		const url = `blob:http://localhost/${guid}`;
+		const path = `${wx.env.USER_DATA_PATH}/${guid}.png`;
+		const fs = wx.getFileSystemManager()
+		fs.writeFileSync(path, blob.array[0],'base64')
+		wx.setStorageSync(url, path);
+		return url;
+	}
 
-  static revokeObjectURL(url) {
-    delete getApp().ObjectURL[url]
-  }
+	static revokeObjectURL(url) {
+		const filePath = wx.getStorageSync(url);
+		const fs = wx.getFileSystemManager()
+		fs.removeSavedFile({
+			filePath
+		})
+		wx.removeStorageSync(url);
+	}
 }
