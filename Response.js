@@ -40,8 +40,8 @@ export default class Response {
         success(res) {
           resolve(res.data)
         },
-        fail: () => {
-          console.error('[fetch.fail]', this.request.url)
+        fail: (e) => {
+          console.error('[fetch.fail]', this.request.url,e)
           // eslint-disable-next-line prefer-promise-reject-errors
           // reject(null)
         }
