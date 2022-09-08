@@ -7,4 +7,7 @@ export default class Blob {
   get size(){
     return this.array[0].length
   }
+  arrayBuffer(){
+    return this.array[0]
+  }
 }

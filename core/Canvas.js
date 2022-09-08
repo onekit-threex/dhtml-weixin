@@ -1,4 +1,6 @@
 import HTMLImageElement from "../HTMLImageElement"
+import Base64 from "./Base64"
+import Blob from "../Blob"
 export default class Canvas{
     
     static canvas2image(canvas3d, canvas2d=getApp().canvas2d) {
@@ -25,4 +27,11 @@ export default class Canvas{
             img.src = canvas3d.toDataURL()
         })
     }
+    static toBlob(canvas, callback, type, quality) {
+        const base64 = canvas.toDataURL(type,quality)
+        const prev = `data:${type};base64,`
+        const buffer = Base64.base64ToArrayBuffer(base64.substring(prev.length))
+        const blob = new Blob([buffer])
+        callback(blob)
+	}
 }
