@@ -36,8 +36,8 @@ export default class EventTarget {
         const prev_e = this._prev_e;
         if (prev_e) {
           if (
-            Math.abs(prev_e.clientX - e.clientX) < 10 &&
-            Math.abs(prev_e.clientY - e.clientY) < 10
+            Math.abs(prev_e.clientX - e.clientX) < 5 &&
+            Math.abs(prev_e.clientY - e.clientY) < 5
           ) {
             return;
           }
