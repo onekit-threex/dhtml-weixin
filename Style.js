@@ -42,6 +42,9 @@ export default class Style {
 			const pages = getCurrentPages();
 			this.page = pages[pages.length - 1];
 		}
+		if(!this.page){
+			return
+		}
 		this.page.setData(data);
 	}
 	set display(value) {
