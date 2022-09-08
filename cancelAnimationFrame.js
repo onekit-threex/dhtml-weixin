@@ -1,4 +1,4 @@
-export default function cancelAnimationFrame(requestId = getApp().requestId, canvas) {
+export default function cancelAnimationFrame(requestId = getApp().onekit_requestId, canvas) {
 	try {
 		if (!requestId) {
 			return
