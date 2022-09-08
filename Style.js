@@ -23,6 +23,12 @@ export default class Style {
 
 	setProperty() {}
 	run(key, value) {
+        if(!this.element){
+            return
+        }
+		if(!this.element.wx_key){
+			return
+		}
 		/*
 		function dict2string(dict) {
 		  var string = "";

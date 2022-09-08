@@ -18,6 +18,7 @@ export default class URL {
 	}
 
 	static revokeObjectURL(url) {
+        console.error("[revokeObjectURL]",url)
 		/*
 		const filePath = wx.getStorageSync(url);
 		const fs = wx.getFileSystemManager()
@@ -26,7 +27,8 @@ export default class URL {
 			filePath
 		})
 	}
-		wx.removeStorageSync(url);*/
+        wx.removeStorageSync(url);*/
+        getApp().ObjectURL[url] = null
 		delete getApp().ObjectURL[url]
 
 	}
