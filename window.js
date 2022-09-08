@@ -59,8 +59,8 @@ export default class Window extends EventTarget {
   // /////////////////
 
   _getSystemInfoSync() {
-    if (!this.systemInfo) {
-      this.systemInfo = wx.getSystemInfoSync()
+    if (!getApp().onekit_systemInfo) {
+      getApp().onekit_systemInfo = wx.getSystemInfoSync()
     }
   }
 
@@ -78,17 +78,17 @@ export default class Window extends EventTarget {
 
   get devicePixelRatio() {
     this._getSystemInfoSync()
-    return this.systemInfo.pixelRatio
+    return getApp().onekit_systemInfo.pixelRatio
   }
 
   get innerWidth() {
     this._getSystemInfoSync()
-    return this.systemInfo.windowWidth
+    return getApp().onekit_systemInfo.windowWidth
   }
 
   get innerHeight() {
     this._getSystemInfoSync()
-    return this.systemInfo.windowHeight
+    return getApp().onekit_systemInfo.windowHeight
   }
 
   get Math() {

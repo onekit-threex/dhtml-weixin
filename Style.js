@@ -51,7 +51,7 @@ export default class Style {
 		if(!this.page){
 			return
 		}
-		this.page.setData(data);
+		//this.page.setData(data);
 	}
 	set display(value) {
 		//this.styles.display = value;
