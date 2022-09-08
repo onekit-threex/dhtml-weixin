@@ -72,7 +72,20 @@ class HTMLElement extends Element {
   click() {}
 
   getBoundingClientRect() {
-    return {};
+		if (this.wx_element) {
+			return {
+				left: this.wx_element._left,
+				top: this.wx_element._top,
+				width: this.wx_element._width,
+				height: this.wx_element._height
+			};
+		}
+		return {
+			left: 0,
+			top: 0,
+			width: 0,
+			height: 0
+		};
   }
   play() {}
   setPointerCapture() {}

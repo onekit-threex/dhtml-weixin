@@ -33,6 +33,16 @@ export default class EventTarget {
         break;
       case "touchmove":
         type = "pointermove";
+        const prev_e = this._prev_e;
+        if (prev_e) {
+          if (
+            Math.abs(prev_e.clientX - e.clientX) < 10 &&
+            Math.abs(prev_e.clientY - e.clientY) < 10
+          ) {
+            return;
+          }
+        }
+        this._prev_e = e;
         break;
       case "touchend":
         type = "pointerup";
