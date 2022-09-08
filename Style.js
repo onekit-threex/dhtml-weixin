@@ -164,51 +164,21 @@ export default class Style {
 	}
 
 	set width(value0) {
-        const value = fix(value0)
-        if(this.styles.width  && Math.abs(this.styles.width - value)<10){
-            return
-        }
-        this.styles.width = value;
 		this.run("width", value0);
 	}
 	set height(value0) {
-        const value = fix(value0)
-        if(this.styles.height  && Math.abs(this.styles.height - value)<10){
-            return
-        }
-        this.styles.height = value;
 		this.run("height", value0);
 	}
 	set left(value0) {
-        const value = fix(value0)
-        if(this.styles.left  && Math.abs(this.styles.left - value)<10){
-            return
-        }
-        this.styles.left = value;
 		this.run("left", value0);
 	}
 	set right(value0) {
-        const value = fix(value0)
-        if(this.styles.right  && Math.abs(this.styles.right - value)<10){
-            return
-        }
-		this.styles.right = value;
 		this.run("right", value0);
 	}
 	set top(value0) {
-        const value = fix(value0)
-        if(this.styles.top  && Math.abs(this.styles.top - value)<10){
-            return
-        }
-		this.styles.top = value;
 		this.run("top", value0);
 	}
 	set bottom(value0) {
-        const value = fix(value0)
-        if(this.styles.bottom  && Math.abs(this.styles.bottom-value)<10){
-            return
-        }
-		this.styles.bottom = value;
 		this.run("bottom", value0);
     }
 

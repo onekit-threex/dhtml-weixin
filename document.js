@@ -11,6 +11,7 @@ import EventTarget from "./EventTarget";
 import Style from "./Style";
 import Element from "./Element";
 import ClassCollection from "./ClassCollection";
+const window = new Window()
 function getPage() {
   const pages = getCurrentPages();
   return pages[pages.length - 1];
@@ -74,10 +75,10 @@ class HTMLElement extends Element {
   getBoundingClientRect() {
 		if (this.wx_element) {
 			return {
-				left: this.wx_element._left,
-				top: this.wx_element._top,
-				width: this.wx_element._width,
-				height: this.wx_element._height
+				left: 0,
+				top:0,
+				width: this.wx_element.width/window.devicePixelRatio,
+				height: this.wx_element.height/window.devicePixelRatio,
 			};
 		}
 		return {
@@ -105,7 +106,7 @@ class Body extends HTMLElement {}
 export default class Document extends EventTarget {
   constructor() {
     super();
-    this.window = new Window();
+    this.window = window;
   }
 
   get body() {
