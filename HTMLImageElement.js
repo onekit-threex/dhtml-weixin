@@ -10,8 +10,8 @@ export default class HTMLImageElement extends EventTarget {
   constructor(canvas2d) {
     super();
     const canvas = canvas2d || getApp().canvas;
-    this.wx_image = canvas.createImage();
-    this.wx_image.onload = () => {
+    this.wx_element = canvas.createImage();
+    this.wx_element.onload = () => {
       if (this.onload) {
         this.onload.call(this);
       }
@@ -21,7 +21,7 @@ export default class HTMLImageElement extends EventTarget {
         });
       }
     };
-    this.wx_image.onerror = (e) => {
+    this.wx_element.onerror = (e) => {
       if (this.onerror) {
         this.onerror.call(this, e);
       }
@@ -34,16 +34,16 @@ export default class HTMLImageElement extends EventTarget {
     this.onekit_image = this;
   }
   get width() {
-    return this.wx_image.width;
+    return this.wx_element.width;
   }
   get height() {
-    return this.wx_image.height;
+    return this.wx_element.height;
   }
   get data() {
-    return this.wx_image.data;
+    return this.wx_element.data;
   }
   get complete() {
-    return this.wx_image.complete;
+    return this.wx_element.complete;
   }
   set crossOrigin(crossOrigin) {
     this._crossOrigin = crossOrigin;
@@ -61,7 +61,7 @@ export default class HTMLImageElement extends EventTarget {
 
     if (src.startsWith("blob:")) {
         const array = getApp().ObjectURL[src].array[0];
-      this.wx_image.src =
+      this.wx_element.src =
         "data:image/png;base64," + Base64.arrayBuffer2Base64(array);
         /*
       const filePath = wx.getStorageSync(src);
@@ -72,9 +72,9 @@ export default class HTMLImageElement extends EventTarget {
           filePath,
         });
       }
-      this.wx_image.src = "data:image/png;base64," + base64;*/
+      this.wx_element.src = "data:image/png;base64," + base64;*/
     } else {
-      this.wx_image.src = src;
+      this.wx_element.src = src;
     }
   }
 

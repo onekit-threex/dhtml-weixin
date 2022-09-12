@@ -9,7 +9,7 @@ function fix(value){
 }
 export default class Style {
 	constructor(element) {
-		this.element = element;
+		//this.element = element;
 		this.styles = {};
 		this.value = "";
 	}
@@ -23,6 +23,7 @@ export default class Style {
 
 	setProperty() {}
 	run(key, value) {
+		return
         if(!this.element){
             return
         }

@@ -5,6 +5,7 @@ import Document from "./document";
 import fetch from "./fetch";
 import Headers from "./Headers";
 import HTMLImageElement from "./HTMLImageElement";
+import HTMLCanvasElement from "./HTMLCanvasElement"
 import navigator from "./navigator";
 import Request from "./Request";
 import requestAnimationFrame from "./requestAnimationFrame";
@@ -39,6 +40,7 @@ module.exports = {
   Element,
   fetch,
   Headers,
+  HTMLCanvasElement,
   HTMLImageElement,
   location,
   navigator,

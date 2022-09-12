@@ -1,37 +1,59 @@
-import HTMLImageElement from "../HTMLImageElement"
-import Base64 from "./Base64"
-import Blob from "../Blob"
-export default class Canvas{
-    
-    static canvas2image(canvas3d, canvas2d=getApp().canvas2d) {
-        if(canvas3d.wx_element){
-            canvas3d = canvas3d.wx_element
-        }
-        return new Promise((callback) => {
-            var image = canvas2d.createImage()
-            image.onload = function () {
-                callback(image)
-            }
-            image.src = canvas3d.toDataURL()
-        })
+import HTMLImageElement from "../HTMLImageElement";
+import HTMLCanvasElement from "../HTMLCanvasElement"
+import Base64 from "./Base64";
+import Blob from "../Blob";
+export default class Canvas {
+  static x2image(x,tobase64,toBuffer) {
+    if(!x){
+      return x
     }
-    static canvas2img(canvas3d, canvas2d=getApp().canvas2d) {
-        if(canvas3d.wx_element){
-            canvas3d = canvas3d.wx_element
+    var img;
+    if (x instanceof HTMLImageElement) {
+      img = x.wx_element;
+    } else if (x instanceof HTMLCanvasElement) {
+      img = x.wx_element;
+      if(tobase64){
+        img = img.toDataURL()
+        if(toBuffer){
+          const prev = "data:image/png;base64,"
+          img = img.substring(prev.length)
+          img = Base64.base64ToArrayBuffer(img)
         }
-        return new Promise((callback) => {
-            var img = new HTMLImageElement(canvas2d)
-            img.onload = function () {
-                callback(img)
-            }
-            img.src = canvas3d.toDataURL()
-        })
+      }
+    } else {
+      img = x;
     }
-    static toBlob(canvas, callback, type, quality) {
-        const base64 = canvas.toDataURL(type,quality)
-        const prev = `data:${type};base64,`
-        const buffer = Base64.base64ToArrayBuffer(base64.substring(prev.length))
-        const blob = new Blob([buffer])
-        callback(blob)
-	}
+    return img;
+  }
+  static canvas2image(canvas3d, canvas2d = getApp().canvas2d) {
+    if (canvas3d.wx_element) {
+      canvas3d = canvas3d.wx_element;
+    }
+    return new Promise((callback) => {
+      var image = canvas2d.createImage();
+      image.onload = function () {
+        callback(image);
+      };
+      image.src = canvas3d.toDataURL();
+    });
+  }
+  static canvas2img(canvas3d, canvas2d = getApp().canvas2d) {
+    if (canvas3d.wx_element) {
+      canvas3d = canvas3d.wx_element;
+    }
+    return new Promise((callback) => {
+      var img = new HTMLImageElement(canvas2d);
+      img.onload = function () {
+        callback(img);
+      };
+      img.src = canvas3d.toDataURL();
+    });
+  }
+  static toBlob(canvas, callback, type, quality) {
+    const base64 = canvas.toDataURL(type, quality);
+    const prev = `data:${type};base64,`;
+    const buffer = Base64.base64ToArrayBuffer(base64.substring(prev.length));
+    const blob = new Blob([buffer]);
+    callback(blob);
+  }
 }

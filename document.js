@@ -20,9 +20,10 @@ class HTMLElement extends Element {
   constructor(wx_element) {
     super();
     this.wx_element = wx_element;
-    this.style = new Style(this);
-    this.classList = new ClassCollection(this);
+    this.style = new Style();
+    this.classList = new ClassCollection();
     this._children = [];
+    this._childNodes = [];
     this.textContent = "";
   }
 
@@ -42,6 +43,9 @@ class HTMLElement extends Element {
   }
   get children() {
     return this._children;
+  }
+  get childNodes() {
+    return this._childNodes;
   }
   set innerHTML(innerHTML) {
     if (typeof innerHTML != "string") {
