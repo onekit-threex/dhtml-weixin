@@ -5,9 +5,7 @@ export default class URL {
     const guid = GUID();
     const url = `blob:http://localhost/${guid}`;
     try {
-      const path = `${wx.env.USER_DATA_PATH}/${guid}`;
-      const fs = wx.getFileSystemManager();
-      fs.writeFileSync(path, blob.array[0], "base64");
+const path = wx.createBufferURL(blob.array[0])
       wx.setStorageSync(url, path);
     } catch (ex) {
       console.error(ex);
@@ -18,12 +16,7 @@ export default class URL {
   static revokeObjectURL(url) {
     try {
       const filePath = wx.getStorageSync(url);
-      const fs = wx.getFileSystemManager();
-      if (fs.accessSync(filePath)) {
-        fs.removeSavedFile({
-          filePath,
-        });
-      }
+      wx.revokeBufferURL(filePath)
       wx.removeStorageSync(url);
     } catch (ex) {
       console.error(ex);

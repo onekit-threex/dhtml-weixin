@@ -1,5 +1,8 @@
 export default function cancelAnimationFrame(canvas,requestId) {
 	try {
+		if(!canvas){
+			return
+		  }
 		if (!requestId) {
 			return
 		}
