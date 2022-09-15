@@ -28,7 +28,7 @@ export default class Canvas {
     }
     return img;
   }
-  static canvas2image(canvas3d, canvas2d = getApp().canvas2d) {
+  static canvas2image(canvas3d, canvas2d) {
     if (canvas3d.wx_element) {
       canvas3d = canvas3d.wx_element;
     }
@@ -40,7 +40,7 @@ export default class Canvas {
       image.src = canvas3d.toDataURL();
     });
   }
-  static canvas2img(canvas3d, canvas2d = getApp().canvas2d) {
+  static canvas2img(canvas3d, canvas2d) {
     if (canvas3d.wx_element) {
       canvas3d = canvas3d.wx_element;
     }

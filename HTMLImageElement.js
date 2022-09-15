@@ -9,7 +9,7 @@ import Base64 from "./core/Base64";
 export default class HTMLImageElement extends EventTarget {
   constructor(canvas2d) {
     super();
-    const canvas = canvas2d || getApp().canvas;
+    const canvas = canvas2d;
     this.wx_element = canvas.createImage();
     this.wx_element.onload = () => {
       if (this.onload) {
@@ -54,28 +54,20 @@ export default class HTMLImageElement extends EventTarget {
   }
 
   set src(src) {
-    if (getApp().onekit_debug) {
-      console[getApp().onekit_debug]("[image]", src);
+    if (wx.getStorageSync("onekit_debug")) {
+      if(src.startsWith("data:")){
+        console[wx.getStorageSync("onekit_debug")]("[image]", "blob");
+      }else{
+        console[wx.getStorageSync("onekit_debug")]("[image]", src);
+      }
     }
     this._src = src;
 
     if (src.startsWith("blob:")) {
-      /*
-      const blob = getApp().ObjectURL[src];
-      const type =
-        blob.options && blob.options.type ? blob.options.type : "image/png";
-      const array = getApp().ObjectURL[src].array[0];
-      this.wx_element.src =
-        `data:${type};base64,` + Base64.arrayBufferToBase64(array);*/
       try {
         const filePath = wx.getStorageSync(src);
         const fs = wx.getFileSystemManager();
         const base64 = fs.readFileSync(filePath, "base64", 0);
-        /*  if (fs.accessSync(filePath)) {
-        fs.removeSavedFile({
-          filePath,
-        });
-      }*/
         this.wx_element.src = "data:image/png;base64," + base64;
       } catch (ex) {
         console.error(ex);

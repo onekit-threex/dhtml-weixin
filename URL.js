@@ -4,12 +4,6 @@ export default class URL {
   static createObjectURL(blob) {
     const guid = GUID();
     const url = `blob:http://localhost/${guid}`;
-    /*
-		if(! getApp().ObjectURL){
-			getApp().ObjectURL = {}
-		}
-		getApp().ObjectURL[url] = blob
-		*/
     try {
       const path = `${wx.env.USER_DATA_PATH}/${guid}`;
       const fs = wx.getFileSystemManager();
@@ -34,8 +28,5 @@ export default class URL {
     } catch (ex) {
       console.error(ex);
     }
-    /*
-    getApp().ObjectURL[url] = null;
-    delete getApp().ObjectURL[url];*/
   }
 }

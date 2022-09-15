@@ -1,4 +1,4 @@
-export default function cancelAnimationFrame(requestId = getApp().onekit_requestId, canvas) {
+export default function cancelAnimationFrame(canvas,requestId) {
 	try {
 		if (!requestId) {
 			return
@@ -6,8 +6,7 @@ export default function cancelAnimationFrame(requestId = getApp().onekit_request
 		if (canvas && canvas.wx_element) {
 			canvas = canvas.wx_element
 		}
-		(canvas || getApp().canvas).cancelAnimationFrame(requestId)
-		getApp().onekit_requestId = null
+		canvas.cancelAnimationFrame(requestId)
 	} catch (ex) {
 		console.error(ex)
 	}

@@ -1,10 +1,11 @@
 /* eslint-disable no-unused-vars */
-export default function createImageBitmap(src, options,canvas) {
+import HTMLImageElement from "./HTMLImageElement"
+export default function createImageBitmap(canvas,src, options) {
   return new Promise((resolve) => {
-    const image = (canvas || getApp().canvas).createImage()
-    image.onload = function() {
-      resolve(image)
+    const img = new HTMLImageElement(canvas)
+    img.onload = function() {
+      resolve(img)
     }
-    image.src = src
+    img.src = src
   })
 }

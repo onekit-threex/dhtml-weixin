@@ -1,8 +1,7 @@
-export default function requestAnimationFrame(callback,canvas) {
+export default function requestAnimationFrame(canvas,callback) {
   if(canvas && canvas.wx_element){
     canvas = canvas.wx_element
   }
-  const requestId = (canvas || getApp().canvas).requestAnimationFrame(callback)
-  getApp().onekit_requestId = requestId
+  const requestId = canvas.requestAnimationFrame(callback)
   return requestId
 }

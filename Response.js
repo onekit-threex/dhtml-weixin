@@ -15,8 +15,8 @@ export default class Response {
   }
 
   _run(responseType, dataType = 'text') {
-    if(getApp().onekit_debug){
-      console[getApp().onekit_debug]('[fetch]', this.request.url, responseType, dataType)
+    if(wx.getStorageSync("onekit_debug")){
+      console[wx.getStorageSync("onekit_debug")]('[fetch]', this.request.url, responseType, dataType)
     }
     if (this.request.url.endsWith('.js')) {
       return new Promise((resolve) => {
