@@ -20,7 +20,7 @@ function b64ToUint6(nChr) {
             : 0
 }
 export default class Base64 {
-  static arrayBuffer2Base64(array) {
+  static arrayBufferToBase64(array) {
   //  return String.fromCharCode.apply(null, new Int8Array(buffer))
   
       let binary = ''

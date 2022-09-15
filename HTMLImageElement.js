@@ -60,10 +60,13 @@ export default class HTMLImageElement extends EventTarget {
     this._src = src;
 
     if (src.startsWith("blob:")) {
-        const array = getApp().ObjectURL[src].array[0];
+      const blob = getApp().ObjectURL[src];
+      const type =
+        blob.options && blob.options.type ? blob.options.type : "image/png";
+      const array = getApp().ObjectURL[src].array[0];
       this.wx_element.src =
-        "data:image/png;base64," + Base64.arrayBuffer2Base64(array);
-        /*
+        `data:${type};base64,` + Base64.arrayBufferToBase64(array);
+      /*
       const filePath = wx.getStorageSync(src);
       const fs = wx.getFileSystemManager();
       const base64 = fs.readFileSync(filePath, "base64", 0);
