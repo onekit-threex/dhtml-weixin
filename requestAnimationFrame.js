@@ -1,4 +1,4 @@
-export default function requestAnimationFrame(canvas,callback) {
+export default function requestAnimationFrame(callback,canvas) {
   if(!canvas){
     return
   }

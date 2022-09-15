@@ -25,6 +25,7 @@ export default class Response {
     }
     if (this.request.url.startsWith('data:')) {
       return new Promise((resolve) => {
+        console.error("[fetch] base64 ??????????????????")
         const BASE64 = 'base64,'
         const url = this.request.url.substring(this.request.url.indexOf(BASE64) + BASE64.length)
         resolve(Base64.base64ToArrayBuffer(url))

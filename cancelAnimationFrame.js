@@ -1,4 +1,4 @@
-export default function cancelAnimationFrame(canvas,requestId) {
+export default function cancelAnimationFrame(requestId,canvas) {
 	try {
 		if(!canvas){
 			return
