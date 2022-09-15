@@ -8,11 +8,18 @@ import Location from './Location'
 import requestAnimationFrame from './requestAnimationFrame'
 import cancelAnimationFrame from './cancelAnimationFrame'
 import createImageBitmap from './createImageBitmap'
+import HTMLImageElement from "./HTMLImageElement";
+import HTMLCanvasElement from "./HTMLCanvasElement"
+import ImageBitmap from "./ImageBitmap"
 import Worker from './Worker'
+import btoa from "./btoa"
 import AudioContext from "./AudioContext"
 // ///////////////////////////////////////////////
 
 export default class Window extends EventTarget {
+  get btoa() {
+    return btoa
+  }
   get Int8Array() {
     return Int8Array
   }
@@ -75,7 +82,15 @@ export default class Window extends EventTarget {
     this.setInterval = setInterval
     this.clearInterval = clearInterval
   }
-
+  get HTMLImageElement() {
+    return HTMLImageElement
+  }
+  get HTMLCanvasElement() {
+    return HTMLCanvasElement
+  }
+  get ImageBitmap() {
+    return ImageBitmap
+  }
   get devicePixelRatio() {
     this._getSystemInfoSync()
     return getApp().onekit_systemInfo.pixelRatio

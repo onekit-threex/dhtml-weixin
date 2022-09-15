@@ -1,4 +1,5 @@
 import HTMLImageElement from "../HTMLImageElement";
+import ImageBitmap from "../ImageBitmap"
 import HTMLCanvasElement from "../HTMLCanvasElement"
 import Base64 from "./Base64";
 import Blob from "../Blob";
@@ -9,6 +10,8 @@ export default class Canvas {
     }
     var img;
     if (x instanceof HTMLImageElement) {
+      img = x.wx_element;
+    } else if (x instanceof ImageBitmap) {
       img = x.wx_element;
     } else if (x instanceof HTMLCanvasElement) {
       img = x.wx_element;
