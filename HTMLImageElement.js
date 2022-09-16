@@ -54,11 +54,12 @@ export default class HTMLImageElement extends EventTarget {
 	}
 
 	set src(src) {
-		if (getApp().onekit_debug) {
+		const onekit_debug = Page.getApp().onekit_debug
+		if (onekit_debug) {
 			if (src.startsWith("data:")) {
-				console[getApp().onekit_debug]("[image]", "blob");
+				console[onekit_debug]("[image]", "blob");
 			} else {
-				console[getApp().onekit_debug]("[image]", src);
+				console[onekit_debug]("[image]", src);
 			}
 		}
 		this._src = src;

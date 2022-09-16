@@ -7,13 +7,13 @@ import HTMLImageElement from "./HTMLImageElement";
 import Window from "./window";
 import Location from "./Location";
 import EventTarget from "./EventTarget";
-/* eslint-disable class-methods-use-this */
+import Page from "./core/Page"
 import Style from "./Style";
 import Element from "./Element";
 import ClassCollection from "./ClassCollection";
 const window = new Window()
 function getPage() {
-  const pages = getCurrentPages();
+  const pages = Page.getCurrentPages();
   return pages[pages.length - 1];
 }
 class HTMLElement extends Element {

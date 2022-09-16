@@ -1,6 +1,7 @@
 "use strict";
 /* eslint-disable class-methods-use-this */
 import String from "./core/String";
+import Page from "./core/Page"
 function fix(value){
     if(value.endsWith("px")){
         value = value.substring(0,value.length-2)
@@ -46,7 +47,7 @@ export default class Style {
 		data[`${this.element.wx_key}_style`] = this.value
 		//
 		if (!this.page) {
-			const pages = getCurrentPages();
+			const pages = page.getCurrentPages();
 			this.page = pages[pages.length - 1];
 		}
 		if(!this.page){

@@ -4,6 +4,7 @@
 /* eslint-disable no-case-declarations */
 /* eslint-disable complexity */
 import EventTarget from "./EventTarget";
+import Page from "./core/Page";
 function json2message(json) {
   if (json == null) {
     return null;
@@ -311,8 +312,9 @@ export default class Worker extends EventTarget {
   // /////////////////
   constructor(url) {
     super();
-    if (getApp().onekit_debug) {
-      console[getApp().onekit_debug]("[Worker]", url);
+		const onekit_debug = Page.getApp().onekit_debug
+    if (onekit_debug) {
+      console[onekit_debug]("[Worker]", url);
     }
     const createNewWorker = () => {
       const worker = wx.createWorker("workers/" + url, {

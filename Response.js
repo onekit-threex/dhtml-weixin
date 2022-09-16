@@ -1,7 +1,7 @@
 /* eslint-disable handle-callback-err */
 /* eslint-disable no-console */
 import Base64 from './core/Base64'
-
+import Page from './core/Page'
 export default class Response {
   constructor(body, options = {}, request) {
     if (!request) {
@@ -15,8 +15,9 @@ export default class Response {
   }
 
   _run(responseType, dataType = 'text') {
-    if(getApp().onekit_debug){
-      console[getApp().onekit_debug]('[fetch]', this.request.url, responseType, dataType)
+		const onekit_debug = Page.getApp().onekit_debug
+    if(onekit_debug){
+      console[onekit_debug]('[fetch]', this.request.url, responseType, dataType)
     }
     if (this.request.url.endsWith('.js')) {
       return new Promise((resolve) => {
