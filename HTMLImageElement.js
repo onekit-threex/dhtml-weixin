@@ -66,7 +66,7 @@ export default class HTMLImageElement extends EventTarget {
 
 		if (src.startsWith("blob:")) {
 			try {
-				const arrayBuffer = Page.current.DataURL[url].array[0]
+				const arrayBuffer = Page.current.DataURL[src].array[0]
 				const base64 = "data:image/png;base64," + Base64.arrayBufferToBase64(arrayBuffer)
 				this.wx_element.src = base64
 			} catch (ex) {
