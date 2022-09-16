@@ -15,8 +15,8 @@ export default class Response {
   }
 
   _run(responseType, dataType = 'text') {
-    if(wx.getStorageSync("onekit_debug")){
-      console[wx.getStorageSync("onekit_debug")]('[fetch]', this.request.url, responseType, dataType)
+    if(getApp().onekit_debug){
+      console[getApp().onekit_debug]('[fetch]', this.request.url, responseType, dataType)
     }
     if (this.request.url.endsWith('.js')) {
       return new Promise((resolve) => {
@@ -32,7 +32,7 @@ export default class Response {
       })
     }
     // /////////////////////////
-    return new Promise((resolve) => {
+    return new Promise((resolve,reject) => {
       wx.request({
         url: this.request.url,
         headers: ((this.request.options || {}).headers || {}).data || {},
@@ -44,7 +44,7 @@ export default class Response {
         fail: (e) => {
           console.error('[fetch.fail]', this.request.url,e)
           // eslint-disable-next-line prefer-promise-reject-errors
-          // reject(null)
+           reject(null)
         }
       })
     })

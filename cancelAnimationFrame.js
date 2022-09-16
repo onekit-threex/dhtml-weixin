@@ -1,4 +1,5 @@
-export default function cancelAnimationFrame(requestId,canvas) {
+import Page from "./core/Page"
+export default function cancelAnimationFrame(requestId,canvas=Page.current.canvas) {
 	try {
 		if(!canvas){
 			return

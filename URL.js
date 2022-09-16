@@ -1,12 +1,15 @@
 import GUID from "./core/GUID";
-
+import Page from "./core/Page"
 export default class URL {
   static createObjectURL(blob) {
     const guid = GUID();
     const url = `blob:http://localhost/${guid}`;
     try {
-const path = wx.createBufferURL(blob.array[0])
-      wx.setStorageSync(url, path);
+  const page = Page.current
+if(!page.DataURL){
+    page.DataURL = {}
+}
+page.DataURL[url] = blob
     } catch (ex) {
       console.error(ex);
     }
@@ -15,9 +18,7 @@ const path = wx.createBufferURL(blob.array[0])
 
   static revokeObjectURL(url) {
     try {
-      const filePath = wx.getStorageSync(url);
-      wx.revokeBufferURL(filePath)
-      wx.removeStorageSync(url);
+        delete  Page.current.DataURL[url]
     } catch (ex) {
       console.error(ex);
     }

@@ -1,4 +1,5 @@
-export default function requestAnimationFrame(callback,canvas) {
+import Page from "./core/Page"
+export default function requestAnimationFrame(callback,canvas=Page.current.canvas) {
   if(!canvas){
     return
   }
