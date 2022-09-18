@@ -17,9 +17,9 @@ export default class HTMLCanvasElement extends HTMLElement {
 		 this.wx_element.height=height;
 	}
 	getContext(type, attrs) {
-    if(type=="webgl2d"){
+    if(type!="webgl"){
       return null
     }
-		return this.wx_element.getContext(type, attrs)
+		return this.wx_element.getContext("webgl", attrs)
 	}
 }
