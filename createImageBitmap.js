@@ -1,13 +1,11 @@
 /* eslint-disable no-unused-vars */
 import HTMLImageElement from "./HTMLImageElement"
-import Page from "./core/Page"
 import Base64 from "./core/Base64"
 import Blob from "./Blob"
 
 export default function createImageBitmap(src, options) {
   return new Promise((resolve) => {
-    const canvas = Page.current.canvas
-    const img = new HTMLImageElement(canvas)
+    const img = new HTMLImageElement()
     img.onload = function() {
       resolve(img)
     }

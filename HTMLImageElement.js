@@ -1,15 +1,10 @@
-/* eslint-disable prefer-spread */
-/* eslint-disable no-console */
-/* eslint-disable no-mixed-operators */
-/* eslint-disable no-bitwise */
-/* eslint-disable no-cond-assign */
-import EventTarget from "./EventTarget";
 import Base64 from "./core/Base64";
 import Page from "./core/Page"
-export default class HTMLImageElement extends EventTarget {
+import HTMLElement from "./HTMLElement"
+export default class HTMLImageElement extends HTMLElement {
 	constructor(canvas2d) {
 		super();
-		const canvas = canvas2d || Page.current.canvas;
+		const canvas = canvas2d || Page.current.canvas.wx_element;
 		this.wx_element = canvas.createImage();
 		this.wx_element.onload = () => {
 			if (this.onload) {
@@ -63,7 +58,10 @@ export default class HTMLImageElement extends EventTarget {
 			}
 		}
 		this._src = src;
-
+		if (src.startsWith('data:')) {
+			this.wx_element.src = src
+			return
+		}
 		if (src.startsWith("blob:")) {
 			try {
 				const arrayBuffer = Page.current.DataURL[src].array[0]
@@ -72,9 +70,11 @@ export default class HTMLImageElement extends EventTarget {
 			} catch (ex) {
 				console.error(ex);
 			}
-		} else {
-			this.wx_element.src = src;
+			return
 		}
+
+		this.wx_element.src = src;
+
 	}
 
 	get src() {

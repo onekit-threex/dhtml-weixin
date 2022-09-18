@@ -26,23 +26,49 @@ export default class Response {
 		if (onekit_debug) {
 			console[onekit_debug]('[fetch]', this.request.url, responseType, dataType)
 		}
-		if (this.request.url.endsWith('.js')) {
+		var url = this.request.url
+		if (url.endsWith('.js')) {
 			return new Promise((resolve) => {
-				resolve(this.request.url)
+				resolve(url)
 			})
 		}
-		if (this.request.url.startsWith('data:')) {
-			return new Promise((resolve) => {
-				console.error("[fetch] base64 ??????????????????")
-				const BASE64 = 'base64,'
-				const url = this.request.url.substring(this.request.url.indexOf(BASE64) + BASE64.length)
-				resolve(Base64.base64ToArrayBuffer(url))
+		if (url.startsWith('data:')) {
+			return new Promise((resolve, reject) => {
+				try {
+					const BASE64 = 'base64,'
+					const url = url.substring(url.indexOf(BASE64) + BASE64.length)
+					resolve(Base64.base64ToArrayBuffer(url))
+				} catch (ex) {
+					console.error(ex)
+					reject(ex)
+				}
 			})
 		}
+		if (url.startsWith('blob:')) {
+			return new Promise((resolve,reject) => {
+				try {
+					const arrayBuffer = Page.current.DataURL[url].array[0]
+					resolve(arrayBuffer)
+				} catch (ex) {
+					console.error(ex);
+					reject(ex)
+				}
+			})
+		}
+		if (url.startsWith("./")) {
+			url = url.substring(2)
+		}
+		if (!url.startsWith("blob:") &&
+			!url.startsWith("data:") &&
+			!url.startsWith("http://") &&
+			!url.startsWith("https://")) {
+			url = (Page.getApp().onekit_path || "") + url
+		}
+
 		// /////////////////////////
 		return new Promise((resolve, reject) => {
 			Page.wx_request({
-				url: this.request.url,
+				url,
 				headers: ((this.request.options || {}).headers || {}).data || {},
 				responseType,
 				dataType,

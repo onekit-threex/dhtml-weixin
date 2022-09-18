@@ -1,6 +1,6 @@
 import HTMLImageElement from "../HTMLImageElement";
-import ImageBitmap from "../ImageBitmap"
-import HTMLCanvasElement from "../HTMLCanvasElement"
+import HTMLCanvasElement from "../HTMLCanvasElement";
+import ImageBitmap from "../ImageBitmap";
 import Base64 from "./Base64";
 import Blob from "../Blob";
 export default class Canvas {
