@@ -36,11 +36,7 @@ export default class Document extends HTMLElement {
             .fields({ node: true })
             .exec((res) => {
               const canvas = res[0].node;
-              //if (canvasType === "2d") {
-                //const context = canvas.getContext("2d");
-                //context.clearRect(0, 0, 10000, 10000);
-              //}
-              resolve(new HTMLCanvasElement(canvas));
+              resolve(canvasType=="webgl"?new HTMLCanvasElement(canvas):canvas);
             });
         });
       default:
@@ -49,38 +45,50 @@ export default class Document extends HTMLElement {
     }
   }
 
-  async getElementByIdAsync(id) {
+  async getElementByIdAsync(id,canvasType="2d",THIS) {
     return new Promise((resolve) => {
       const query = wx.createSelectorQuery();
+      if (THIS) {
+        query = query.in(THIS);
+      }
       query
         .select(`#${id}`)
         .fields({ node: true })
         .exec((res) => {
-          resolve(new HTMLCanvasElement(res[0].node));
+            const canvas = res[0].node;
+            resolve(canvasType=="webgl"?new HTMLCanvasElement(canvas):canvas);
         });
     });
   }
 
-  async getElementsByTagNameAsync(tagName) {
+  async getElementsByTagNameAsync(tagName,canvasType="2d",THIS) {
     return new Promise((resolve) => {
       const query = wx.createSelectorQuery();
+      if (THIS) {
+        query = query.in(THIS);
+      }
       query
         .select(tagName)
         .fields({ node: true })
         .exec((res) => {
-          resolve(new HTMLCanvasElement(res[0].node));
+            const canvas = res[0].node;
+            resolve(canvasType=="webgl"?new HTMLCanvasElement(canvas):canvas);
         });
     });
   }
 
-  async getElementsByClassNameAsync(className) {
+  async getElementsByClassNameAsync(className,canvasType="2d",THIS) {
     return new Promise((resolve) => {
       const query = wx.createSelectorQuery();
+      if (THIS) {
+        query = query.in(THIS);
+      }
       query
         .select(`.${className}`)
         .fields({ node: true })
         .exec((res) => {
-          resolve(new HTMLCanvasElement(res[0].node));
+            const canvas = res[0].node;
+            resolve(canvasType=="webgl"?new HTMLCanvasElement(canvas):canvas);
         });
     });
   }
@@ -88,7 +96,7 @@ export default class Document extends HTMLElement {
   createElement(nodeName, canvasType = "2d",canvas) {
     switch (nodeName) {
       case "canvas":
-         return new HTMLCanvasElement(wx.createOffscreenCanvas({ type: canvasType }));
+         return wx.createOffscreenCanvas({ type: canvasType });
       case "img":
         return new HTMLImageElement(canvas);
       default:
