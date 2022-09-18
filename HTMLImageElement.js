@@ -48,23 +48,24 @@ export default class HTMLImageElement extends HTMLElement {
 		return this._crossOrigin;
 	}
 
-	set src(src) {
+	set src(url) {
 		const onekit_debug = Page.getApp().onekit_debug
 		if (onekit_debug) {
-			if (src.startsWith("data:")) {
+			if (url.startsWith("data:")) {
 				console[onekit_debug]("[image]", "blob");
 			} else {
-				console[onekit_debug]("[image]", src);
+				console[onekit_debug]("[image]", url);
 			}
 		}
-		this._src = src;
-		if (src.startsWith('data:')) {
-			this.wx_element.src = src
+		if (url.startsWith('data:')) {
+			this._src = url;
+			this.wx_element.src = url
 			return
 		}
-		if (src.startsWith("blob:")) {
+		if (url.startsWith("blob:")) {
 			try {
-				const arrayBuffer = Page.current.DataURL[src].array[0]
+				this._src = url;
+				const arrayBuffer = Page.current.DataURL[url].array[0]
 				const base64 = "data:image/png;base64," + Base64.arrayBufferToBase64(arrayBuffer)
 				this.wx_element.src = base64
 			} catch (ex) {
@@ -72,8 +73,16 @@ export default class HTMLImageElement extends HTMLElement {
 			}
 			return
 		}
-
-		this.wx_element.src = src;
+		if (url.startsWith("./")) {
+			url = url.substring(2)
+		}
+		if (!url.startsWith("blob:") &&
+			!url.startsWith("data:") &&
+			!url.startsWith("http://") &&
+			!url.startsWith("https://")) {
+			url = (Page.getApp().onekit_path || "") + url
+		}
+		this.wx_element.src = url;
 
 	}
 
