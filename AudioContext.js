@@ -49,6 +49,22 @@ class Panner {
       //  this.wx_panner.connct(gain.wx_gain)
     }
 }
+class Listener {
+    constructor() {
+    }
+    get positionX() {
+        return 0;
+    }
+    get positionY() {
+        return 0;
+    }
+    setPosition(){
+
+    }
+    setOrientation (){
+        
+    }
+}
 export default class AudioContext {
     constructor() {
         this.wx_context = wx.createWebAudioContext()
@@ -58,6 +74,9 @@ export default class AudioContext {
     }
     createPanner() {
         return new Panner(this.wx_context.createPanner())
+    }   
+    get listener() {
+        return new Listener()
     }
     get currentTime() {
         return this.wx_context.currentTime
