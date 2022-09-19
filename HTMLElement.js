@@ -63,11 +63,12 @@ export default class HTMLElement extends Element {
   
     getBoundingClientRect() {
           if (this.wx_element) {
+            const systemInfo = wx.getSystemInfoSync()
               return {
                   left: 0,
                   top:0,
-                  width: this.wx_element.width/window.devicePixelRatio,
-                  height: this.wx_element.height/window.devicePixelRatio,
+                  width: this.wx_element.width/systemInfo.pixelRatio,
+                  height: this.wx_element.height/systemInfo.pixelRatio,
               };
           }
           return {
