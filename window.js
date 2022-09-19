@@ -14,9 +14,14 @@ import ImageBitmap from "./ImageBitmap"
 import Worker from './Worker'
 import btoa from "./btoa"
 import AudioContext from "./AudioContext"
+import ImageData from "./ImageData"
 // ///////////////////////////////////////////////
 
 export default class Window extends EventTarget {
+
+  get ImageData(){
+    return ImageData
+  }
   get btoa() {
     return btoa
   }

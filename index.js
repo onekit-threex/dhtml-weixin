@@ -26,6 +26,7 @@ import Node from "./Node";
 import Event from "./Event";
 import Performance from "./Performance";
 import btoa from "./btoa"
+import ImageData from "./ImageData"
 import AudioContext from "./AudioContext"
 const performance = new Performance();
 const document = new Document();
@@ -34,6 +35,7 @@ const self = window;
 const location = new Location();
 module.exports = {
   AudioContext,
+  ImageData,
   Blob,
   btoa,
   createImageBitmap,
