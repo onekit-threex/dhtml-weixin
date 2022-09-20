@@ -28,7 +28,7 @@ export default class Canvas {
 		}
 		return img;
 	}
-	static canvas2image(canvas3d, canvas2d) {
+	static fix(canvas3d, canvas2d) {
 		if (canvas3d.wx_element) {
 			canvas3d = canvas3d.wx_element;
 		}
