@@ -22,4 +22,7 @@ export default class HTMLCanvasElement extends HTMLElement {
     }
     return this.wx_element.getContext(type, attrs);
   }
+  toDataURL( type,  encoderOptions){
+    return this.wx_element.toDataURL(type, encoderOptions); 
+  }
 }
