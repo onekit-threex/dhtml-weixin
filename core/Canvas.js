@@ -4,6 +4,7 @@ import ImageBitmap from "../ImageBitmap";
 import Base64 from "./Base64";
 import Blob from "../Blob";
 export default class Canvas {
+	/*
 	static x2image(x, tobase64, toBuffer) {
 		if (!x) {
 			return x;
@@ -27,23 +28,49 @@ export default class Canvas {
 			img = x;
 		}
 		return img;
-	}
-	static fix(canvas3d, canvas2d) {
-		if (canvas3d.wx_element) {
-			canvas3d = canvas3d.wx_element;
+	}*/
+	static fix(canvas, canvas_image) {
+		if (canvas.wx_element) {
+			canvas = canvas.wx_element;
+		}
+		if (canvas_image.wx_element) {
+			canvas_image = canvas_image.wx_element;
 		}
 		return new Promise((callback, reject) => {
 			try {
-				var image = canvas3d.createImage();
+				var image = canvas.createImage();
 				image.onload = function () {
-					var result = new HTMLCanvasElement(canvas2d)
+					var result = new HTMLCanvasElement(canvas_image)
 					result.image = image
 					callback(result);
 				};
 				image.onerror = function (e) {
 					reject(e)
 				}
-				image.src = canvas2d.toDataURL();
+				image.src = canvas_image.toDataURL();
+
+			} catch (e) {
+				reject(e)
+			}
+		});
+    }
+	static toImage(canvas, canvas_image) {
+		if (canvas.wx_element) {
+			canvas = canvas3d.wx_element;
+		}
+		if (canvas_image.wx_element) {
+			canvas_image = canvas_image.wx_element;
+		}
+		return new Promise((callback, reject) => {
+			try {
+				var image = canvas.createImage();
+				image.onload = function () {
+					callback(image);
+				};
+				image.onerror = function (e) {
+					reject(e)
+				}
+				image.src = canvas_image.toDataURL();
 
 			} catch (e) {
 				reject(e)
