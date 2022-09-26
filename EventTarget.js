@@ -62,7 +62,9 @@ export default class EventTarget {
         "touchcancel": ["pointercancel"],
       }
       var event_handlers = this._all_event_handlers[type] || [];
-      if (event_handlers.length <= 0 && Object.keys(Mobile2Web).includes(type)) {
+      if (
+        event_handlers.length <= 0 &&
+        Object.keys(Mobile2Web).includes(type)) {
         const types = Mobile2Web[type]
         for (const t of types) {
           const handlers = this._all_event_handlers[t]
