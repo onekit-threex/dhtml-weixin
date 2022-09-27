@@ -26,7 +26,7 @@ export default class EventTarget {
     return new Event(type);
   }
   dispatchEvent (e) {
-   // setTimeout(() => {
+    setTimeout(() => {
       var type = e.type;
       /*switch (e.type) {
         case "touchstart":
@@ -76,6 +76,6 @@ export default class EventTarget {
       for (var event_handler of event_handlers) {
         event_handler.call(this, e);
       }
-   // }, 1);
+    }, 0);
   }
 }
