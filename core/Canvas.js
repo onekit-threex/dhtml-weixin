@@ -56,7 +56,7 @@ export default class Canvas {
     }
 	static toImage(canvas, canvas_image) {
 		if (canvas.wx_element) {
-			canvas = canvas3d.wx_element;
+			canvas = canvas.wx_element;
 		}
 		if (canvas_image.wx_element) {
 			canvas_image = canvas_image.wx_element;
