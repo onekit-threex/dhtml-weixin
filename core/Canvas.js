@@ -4,31 +4,6 @@ import ImageBitmap from "../ImageBitmap";
 import Base64 from "./Base64";
 import Blob from "../Blob";
 export default class Canvas {
-	/*
-	static x2image(x, tobase64, toBuffer) {
-		if (!x) {
-			return x;
-		}
-		var img;
-		if (x instanceof HTMLImageElement) {
-			img = x.wx_element;
-		} else if (x instanceof ImageBitmap) {
-			img = x.wx_element;
-		} else if (x instanceof HTMLCanvasElement) {
-			img = x.wx_element;
-			if (tobase64) {
-				img = img.toDataURL();
-				if (toBuffer) {
-					const prev = "data:image/png;base64,";
-					img = img.substring(prev.length);
-					img = Base64.base64ToArrayBuffer(img);
-				}
-			}
-		} else {
-			img = x;
-		}
-		return img;
-	}*/
 	static fix(canvas, canvas_image) {
 		if (canvas.wx_element) {
 			canvas = canvas.wx_element;

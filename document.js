@@ -36,7 +36,7 @@ export default class Document extends HTMLElement {
             .fields({ node: true })
             .exec((res) => {
               const canvas = res[0].node;
-              resolve(canvasType=="webgl"?new HTMLCanvasElement(canvas):canvas);
+              resolve(new HTMLCanvasElement(canvas));
             });
         });
       default:
@@ -56,7 +56,7 @@ export default class Document extends HTMLElement {
         .fields({ node: true })
         .exec((res) => {
             const canvas = res[0].node;
-            resolve(canvasType=="webgl"?new HTMLCanvasElement(canvas):canvas);
+            resolve(new HTMLCanvasElement(canvas));
         });
     });
   }
@@ -72,7 +72,7 @@ export default class Document extends HTMLElement {
         .fields({ node: true })
         .exec((res) => {
             const canvas = res[0].node;
-            resolve(canvasType=="webgl"?new HTMLCanvasElement(canvas):canvas);
+            resolve([new HTMLCanvasElement(canvas)]);
         });
     });
   }
@@ -88,7 +88,7 @@ export default class Document extends HTMLElement {
         .fields({ node: true })
         .exec((res) => {
             const canvas = res[0].node;
-            resolve(canvasType=="webgl"?new HTMLCanvasElement(canvas):canvas);
+            resolve([new HTMLCanvasElement(canvas)]);
         });
     });
   }
@@ -96,11 +96,7 @@ export default class Document extends HTMLElement {
   createElement(nodeName, canvasType = "2d",canvas) {
     switch (nodeName) {
       case "canvas":
-       // if(canvasType=="webgl"){
          return new HTMLCanvasElement(wx.createOffscreenCanvas({ type: canvasType }));
-        //}else{
-          //return new HTMLCanvasElement(wx.createOffscreenCanvas({ type: canvasType })); 
-        //}
       case "img":
         return new HTMLImageElement(canvas);
       default:

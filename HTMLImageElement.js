@@ -5,8 +5,8 @@ export default class HTMLImageElement extends HTMLElement {
 	constructor(canvas2d) {
 		super();
 		const canvas = canvas2d || Page.current.canvas.wx_element;
-		this.wx_element = canvas.createImage();
-		this.wx_element.onload = () => {
+		this.image = canvas.createImage();
+		this.image.onload = () => {
 			if (this.onload) {
 				this.onload.call(this);
 			}
@@ -16,7 +16,7 @@ export default class HTMLImageElement extends HTMLElement {
 				});
 			}
 		};
-		this.wx_element.onerror = (e) => {
+		this.image.onerror = (e) => {
 			if (this.onerror) {
 				this.onerror.call(this, e);
 			}
@@ -29,16 +29,16 @@ export default class HTMLImageElement extends HTMLElement {
 		this.onekit_image = this;
 	}
 	get width() {
-		return this.wx_element.width;
+		return this.image.width;
 	}
 	get height() {
-		return this.wx_element.height;
+		return this.image.height;
 	}
 	get data() {
-		return this.wx_element.data;
+		return this.image.data;
 	}
 	get complete() {
-		return this.wx_element.complete;
+		return this.image.complete;
 	}
 	set crossOrigin(crossOrigin) {
 		this._crossOrigin = crossOrigin;
@@ -59,7 +59,7 @@ export default class HTMLImageElement extends HTMLElement {
 		}
 		if (url.startsWith('data:')) {
 			this._src = url;
-			this.wx_element.src = url
+			this.image.src = url
 			return
 		}
 		if (url.startsWith("blob:")) {
@@ -67,7 +67,7 @@ export default class HTMLImageElement extends HTMLElement {
 				this._src = url;
 				const arrayBuffer = Page.current.DataURL[url].array[0]
 				const base64 = "data:image/png;base64," + Base64.arrayBufferToBase64(arrayBuffer)
-				this.wx_element.src = base64
+				this.image.src = base64
 			} catch (ex) {
 				console.error(ex);
 			}
@@ -82,7 +82,7 @@ export default class HTMLImageElement extends HTMLElement {
 			!url.startsWith("https://")) {
 			url = (Page.getApp().onekit_path || "") + url
 		}
-		this.wx_element.src = url;
+		this.image.src = url;
 
 	}
 
