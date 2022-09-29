@@ -1,7 +1,7 @@
 import Base64 from "./core/Base64";
 import Page from "./core/Page"
-import HTMLElement from "./HTMLElement"
-export default class HTMLImageElement extends HTMLElement {
+import EventTarget from "./EventTarget"
+export default class HTMLImageElement extends EventTarget {
   constructor(canvas2d) {
     super();
     const canvas = canvas2d || Page.current.canvas.wx_element;
