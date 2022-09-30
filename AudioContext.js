@@ -35,7 +35,7 @@ class BufferSource {
         this.wx_source.stop( )
     }
     connect(data){
-        this.wx_source.connect( data)
+        //this.wx_source.connect( data)
     }
 }
 class Panner {
