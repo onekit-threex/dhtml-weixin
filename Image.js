@@ -4,8 +4,8 @@ import EventTarget from "./EventTarget"
 export default class HTMLImageElement extends EventTarget {
   constructor(canvas2d) {
     super();
-    const canvas = canvas2d || Page.current.canvas.wx_element;
-    this.image = canvas.createImage();
+    var canvas = canvas2d || Page.current.canvas.wx_element;
+    this.image = wx.createOffscreenCanvas({width:canvas.width,height:canvas.height,type:"2d"}).createImage();
     this.image.onload = () => {
       if (this.onload) {
         this.onload.call(this);
