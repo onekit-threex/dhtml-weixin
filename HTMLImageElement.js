@@ -2,7 +2,7 @@ import Base64 from "./core/Base64";
 import Page from "./core/Page"
 import HTMLElement from "./HTMLElement"
 export default class HTMLImageElement extends HTMLElement {
-  constructor() {
+  constructor(canvas2d) {
     super();
     var canvas = canvas2d || Page.current.canvas.wx_element;
     this.image = canvas.createImage();
