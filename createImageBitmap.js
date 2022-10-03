@@ -5,7 +5,7 @@ import Blob from "./Blob"
 
 export default function createImageBitmap (src, options) {
   return new Promise((resolve) => {
-    const img = new HTMLImageElement()
+    const img = new HTMLImageElement(wx.createOffscreenCanvas({type:"2d"}))
     img.onload = function () {
       resolve(img)
     }

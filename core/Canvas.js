@@ -1,4 +1,3 @@
-import HTMLImageElement from "../HTMLImageElement";
 import HTMLCanvasElement from "../HTMLCanvasElement";
 import ImageBitmap from "../ImageBitmap";
 import Base64 from "./Base64";

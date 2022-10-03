@@ -93,12 +93,12 @@ export default class Document extends HTMLElement {
     });
   }
 
-  createElement (nodeName, canvasType = "2d", canvas) {
+  createElement (nodeName, canvasType = "2d") {
     switch (nodeName) {
       case "canvas":
         return new HTMLCanvasElement(wx.createOffscreenCanvas({ type: canvasType }));
       case "img":
-        return new HTMLImageElement(canvas);
+        return new HTMLImageElement(wx.createOffscreenCanvas({ type: canvasType }));
       default:
         return new HTMLElement();
     }

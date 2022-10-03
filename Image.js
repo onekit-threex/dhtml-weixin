@@ -1,11 +1,11 @@
 import Base64 from "./core/Base64";
 import Page from "./core/Page"
 import EventTarget from "./EventTarget"
-export default class HTMLImageElement extends EventTarget {
+export default class Image extends EventTarget {
   constructor(canvas2d) {
     super();
     var canvas = canvas2d || Page.current.canvas.wx_element;
-    this.image = wx.createOffscreenCanvas({width:canvas.width,height:canvas.height,type:"2d"}).createImage();
+    this.image = canvas.createImage();
     this.image.onload = () => {
       if (this.onload) {
         this.onload.call(this);
@@ -26,7 +26,6 @@ export default class HTMLImageElement extends EventTarget {
         });
       }
     };
-    this.onekit_image = this;
   }
   get width () {
     return this.image.width;
@@ -52,9 +51,9 @@ export default class HTMLImageElement extends EventTarget {
     const onekit_debug = Page.getApp().onekit_debug
     if (onekit_debug) {
       if (url.startsWith("data:")) {
-        console[onekit_debug]("[image]", "blob");
+        console[onekit_debug]("[Image]", "blob");
       } else {
-        console[onekit_debug]("[image]", url);
+        console[onekit_debug]("[Image]", url);
       }
     }
     if (url.startsWith('data:')) {
@@ -83,7 +82,6 @@ export default class HTMLImageElement extends EventTarget {
       url = (Page.getApp().onekit_path || "") + url
     }
     this.image.src = url;
-
   }
 
   get src () {
