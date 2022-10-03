@@ -2,9 +2,9 @@ import Base64 from "./core/Base64";
 import Page from "./core/Page"
 import EventTarget from "./EventTarget"
 export default class Image extends EventTarget {
-  constructor(canvas2d) {
+  constructor() {
     super();
-    var canvas = canvas2d || Page.current.canvas.wx_element;
+    var canvas = wx.createOffscreenCanvas({type:"2d"})//canvas2d || Page.current.canvas.wx_element;
     this.image = canvas.createImage();
     this.image.onload = () => {
       if (this.onload) {
