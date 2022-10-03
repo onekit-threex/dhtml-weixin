@@ -95,4 +95,10 @@ export default class HTMLElement extends Element {
   get clientHeight() {
     return this.wx_element ? this.wx_element.height : 0;
   }
+  get pageXOffset(){
+    return 0
+  }
+  get pageYOffset(){
+    return 0
+  }
 }

@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable getter-return */
 /* eslint-disable class-methods-use-this */
-import EventTarget from './EventTarget'
+import HTMLElement from './HTMLElement'
 import URL from './URL'
 import Performance from './Performance'
 import Location from './Location'
@@ -19,7 +19,7 @@ import ImageData from "./ImageData"
 import Event from "./Event"
 // ///////////////////////////////////////////////
 
-export default class Window extends EventTarget {
+export default class Window extends HTMLElement {
   get Image () {
     return Image
   }

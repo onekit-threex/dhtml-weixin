@@ -1,10 +1,11 @@
 import Base64 from "./core/Base64";
-import Page from "./core/Page"
-import EventTarget from "./EventTarget"
+import Page from "./core/Page";
+import EventTarget from "./EventTarget";
 export default class Image extends EventTarget {
   constructor() {
     super();
-    var canvas = wx.createOffscreenCanvas({type:"2d"})//canvas2d || Page.current.canvas.wx_element;
+    //var canvas = wx.createOffscreenCanvas({type:"2d"})//canvas2d || Page.current.canvas.wx_element;
+    var canvas = Page.current.canvas.wx_element;
     this.image = canvas.createImage();
     this.image.onload = () => {
       if (this.onload) {
@@ -27,28 +28,28 @@ export default class Image extends EventTarget {
       }
     };
   }
-  get width () {
+  get width() {
     return this.image.width;
   }
-  get height () {
+  get height() {
     return this.image.height;
   }
-  get data () {
+  get data() {
     return this.image.data;
   }
-  get complete () {
+  get complete() {
     return this.image.complete;
   }
-  set crossOrigin (crossOrigin) {
+  set crossOrigin(crossOrigin) {
     this._crossOrigin = crossOrigin;
   }
 
-  get crossOrigin () {
+  get crossOrigin() {
     return this._crossOrigin;
   }
 
-  set src (url) {
-    const onekit_debug = Page.getApp().onekit_debug
+  set src(url) {
+    const onekit_debug = Page.getApp().onekit_debug;
     if (onekit_debug) {
       if (url.startsWith("data:")) {
         console[onekit_debug]("[Image]", "blob");
@@ -56,35 +57,38 @@ export default class Image extends EventTarget {
         console[onekit_debug]("[Image]", url);
       }
     }
-    if (url.startsWith('data:')) {
+    if (url.startsWith("data:")) {
       this._src = url;
-      this.image.src = url
-      return
+      this.image.src = url;
+      return;
     }
     if (url.startsWith("blob:")) {
       try {
         this._src = url;
-        const arrayBuffer = Page.current.DataURL[url].array[0]
-        const base64 = "data:image/png;base64," + Base64.arrayBufferToBase64(arrayBuffer)
-        this.image.src = base64
+        const arrayBuffer = Page.current.DataURL[url].array[0];
+        const base64 =
+          "data:image/png;base64," + Base64.arrayBufferToBase64(arrayBuffer);
+        this.image.src = base64;
       } catch (ex) {
         console.error(ex);
       }
-      return
+      return;
     }
     if (url.startsWith("./")) {
-      url = url.substring(2)
+      url = url.substring(2);
     }
-    if (!url.startsWith("blob:") &&
+    if (
+      !url.startsWith("blob:") &&
       !url.startsWith("data:") &&
       !url.startsWith("http://") &&
-      !url.startsWith("https://")) {
-      url = (Page.getApp().onekit_path || "") + url
+      !url.startsWith("https://")
+    ) {
+      url = (Page.getApp().onekit_path || "") + url;
     }
     this.image.src = url;
   }
 
-  get src () {
+  get src() {
     return this._src;
   }
 }

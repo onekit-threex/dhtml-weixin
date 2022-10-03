@@ -4,7 +4,7 @@ import HTMLElement from "./HTMLElement"
 export default class HTMLImageElement extends HTMLElement {
   constructor() {
     super();
-    var canvas = wx.createOffscreenCanvas({type:"2d"})//canvas2d || Page.current.canvas.wx_element;
+        var canvas = wx.createOffscreenCanvas({type:"2d"})//canvas2d || Page.current.canvas.wx_element;
     this.image = canvas.createImage();
     this.image.onload = () => {
       if (this.onload) {
