@@ -1,2 +1,2 @@
-var encoding = require("./core/text-encoding/encoding.js");
+const encoding = require('./core/encoding/encoding.js')
 module.exports = encoding.TextDecoder

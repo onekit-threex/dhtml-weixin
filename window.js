@@ -17,9 +17,13 @@ import btoa from "./btoa"
 import AudioContext from "./AudioContext"
 import ImageData from "./ImageData"
 import Event from "./Event"
+import TextDecoder from "./TextDecoder"
 // ///////////////////////////////////////////////
 
 export default class Window extends HTMLElement {
+    get TextDecoder(){
+        return TextDecoder
+    }
   get Image () {
     return Image
   }
