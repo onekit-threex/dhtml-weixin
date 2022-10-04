@@ -98,7 +98,7 @@ export default class Document extends HTMLElement {
       case "canvas":
         return new HTMLCanvasElement(wx.createOffscreenCanvas({ type: canvasType }));
       case "img":
-        return new HTMLImageElement(wx.createOffscreenCanvas({ type: canvasType }));
+        return new HTMLImageElement();
       default:
         return new HTMLElement();
     }

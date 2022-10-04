@@ -2,10 +2,11 @@ import Base64 from "./core/Base64";
 import Page from "./core/Page"
 import HTMLElement from "./HTMLElement"
 export default class HTMLImageElement extends HTMLElement {
-  constructor() {
-    super();
-        var canvas = wx.createOffscreenCanvas({type:"2d"})//canvas2d || Page.current.canvas.wx_element;
-    this.image = canvas.createImage();
+  constructor(canvas2d) { 
+       super();
+       this.isOffscreen = canvas2d && canvas2d.isOffscreenCanvas
+       var canvas = canvas2d || Page.current.canvas.wx_element;
+            this.image = canvas.createImage();
     this.image.onload = () => {
       if (this.onload) {
         this.onload.call(this);
@@ -51,7 +52,7 @@ export default class HTMLImageElement extends HTMLElement {
     const onekit_debug = Page.getApp().onekit_debug
     if (onekit_debug) {
       if (url.startsWith("data:")) {
-        console[onekit_debug]("[HTMLImageElement]", "blob");
+        console[onekit_debug]("[HTMLImageElement]", "blob",url);
       } else {
         console[onekit_debug]("[HTMLImageElement]", url);
       }
