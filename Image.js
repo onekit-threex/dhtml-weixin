@@ -6,6 +6,9 @@ export default class Image extends EventTarget {
     super();
 		this.isOffscreen = canvas2d && canvas2d.isOffscreenCanvas
 		var canvas = canvas2d || Page.current.canvas.wx_element;
+    if(!canvas){
+			canvas = Page.getApp().canvas
+		}
     this.image = canvas.createImage();
     this.image.onload = () => {
       if (this.onload) {
@@ -65,7 +68,11 @@ export default class Image extends EventTarget {
     if (url.startsWith("blob:")) {
       try {
         this._src = url;
-        const arrayBuffer = Page.current.DataURL[url].array[0];
+        var global = Page.current
+        if(!global){
+          global = Page.getApp()
+        }
+        const arrayBuffer = global.DataURL[url].array[0];
         const base64 =
           "data:image/png;base64," + Base64.arrayBufferToBase64(arrayBuffer);
         this.image.src = base64;

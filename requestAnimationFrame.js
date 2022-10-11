@@ -1,6 +1,9 @@
 import Page from "./core/Page"
 export default function requestAnimationFrame(callback,canvas=Page.current.canvas) {
   if(!canvas){
+    canvas = Page.getApp().canvas
+  }
+  if(!canvas){
     return
   }
   if(canvas && canvas.wx_element){

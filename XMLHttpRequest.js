@@ -52,7 +52,11 @@ export default class XMLHttpRequest extends EventTarget {
 		}
 		if (url.startsWith('blob:')) {
 			try {
-				const data = Page.current.DataURL[url].array[0]
+				var global = Page.current
+				if(!global){
+				  global = Page.getApp()
+				}
+				const data = global.DataURL[url].array[0]
 				callback.call(this, {data});
 			} catch (ex) {
 				console.error(ex);

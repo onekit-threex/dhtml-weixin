@@ -5,11 +5,14 @@ export default class URL {
     const guid = GUID();
     const url = `blob:http://localhost/${guid}`;
     try {
-  const page = Page.current
-if(!page.DataURL){
-    page.DataURL = {}
-}
-page.DataURL[url] = blob
+      var global = Page.current
+      if (!global) {
+        global = Page.getApp()
+      }
+      if (!golbal.DataURL) {
+        global.DataURL = {}
+      }
+      global.DataURL[url] = blob
     } catch (ex) {
       console.error(ex);
     }
@@ -18,7 +21,11 @@ page.DataURL[url] = blob
 
   static revokeObjectURL(url) {
     try {
-        delete  Page.current.DataURL[url]
+      var global = Page.current
+      if (!global) {
+        global = Page.getApp()
+      }
+      delete global.DataURL[url]
     } catch (ex) {
       console.error(ex);
     }

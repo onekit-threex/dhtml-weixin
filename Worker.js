@@ -312,7 +312,13 @@ export default class Worker extends EventTarget {
   // /////////////////
   constructor(url) {
     super();
-    Page.current.worker = this
+    var global = Page.current
+    if(!global){
+      global = Page.getApp()
+    }
+    //if(Page.current){
+      global.worker = this
+    //}
 		const onekit_debug = Page.getApp().onekit_debug
     if (onekit_debug) {
       console[onekit_debug]("[Worker]", url);

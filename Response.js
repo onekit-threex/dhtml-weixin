@@ -47,7 +47,11 @@ export default class Response {
 		if (url.startsWith('blob:')) {
 			return new Promise((resolve,reject) => {
 				try {
-					const arrayBuffer = Page.current.DataURL[url].array[0]
+					var global = Page.current
+					if(!global){
+					  global = Page.getApp()
+					}
+					const arrayBuffer = global.DataURL[url].array[0]
 					resolve(arrayBuffer)
 				} catch (ex) {
 					console.error(ex);

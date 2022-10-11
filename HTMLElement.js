@@ -45,7 +45,9 @@ export default class HTMLElement extends Element {
     const key = `${this.wx_key}_innerHTML`;
     const data = {};
     data[key] = innerHTML;
-    Page.current.setData(data);
+    if(Page.current){
+      Page.current.setData(data);
+    }
   }
   get innerHTML() {
     return this._innerHTML;
