@@ -5,7 +5,10 @@ import Page from "./core/Page"
 function run(cb, wx_object) {
 	return new Promise((resolve, reject) => {
 		wx_object.success = resolve;
-		wx_object.fail = reject;
+		wx_object.fail = (e) => {
+			console.error("[XMLHttpRequest]", e)
+			reject(e)
+		};
 		cb(Page.wx_request(wx_object));
 	});
 }
@@ -42,9 +45,9 @@ export default class XMLHttpRequest extends EventTarget {
 		if (url.startsWith('data:')) {
 			try {
 				const BASE64 = 'base64,'
-				 url = url.substring(url.indexOf(BASE64) + BASE64.length)
+				url = url.substring(url.indexOf(BASE64) + BASE64.length)
 				const data = Base64.base64ToArrayBuffer(url)
-				callback.call(this, {data});
+				callback.call(this, { data });
 			} catch (ex) {
 				console.error(ex);
 			}
@@ -53,11 +56,11 @@ export default class XMLHttpRequest extends EventTarget {
 		if (url.startsWith('blob:')) {
 			try {
 				var global = Page.current
-				if(!global){
-				  global = Page.getApp()
+				if (!global) {
+					global = Page.getApp()
 				}
 				const data = global.DataURL[url].array[0]
-				callback.call(this, {data});
+				callback.call(this, { data });
 			} catch (ex) {
 				console.error(ex);
 			}

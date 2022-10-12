@@ -9,7 +9,7 @@ export default class URL {
       if (!global) {
         global = Page.getApp()
       }
-      if (!golbal.DataURL) {
+      if (!global.DataURL) {
         global.DataURL = {}
       }
       global.DataURL[url] = blob
