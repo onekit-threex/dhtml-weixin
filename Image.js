@@ -87,6 +87,7 @@ export default class Image extends EventTarget {
     if (
       !url.startsWith("blob:") &&
       !url.startsWith("data:") &&
+      !url.startsWith("mini:") &&
       !url.startsWith("http://") &&
       !url.startsWith("https://")
     ) {

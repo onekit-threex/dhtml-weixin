@@ -32,6 +32,24 @@ export default class Response {
 				resolve(url)
 			})
 		}
+		if (url.startsWith('mini:')) {
+			return new Promise((resolve, reject) => {
+				try {
+					if (dataType == 'text') {
+						const MINI = 'mini:'
+						const text = url.substring(MINI.length)
+						resolve(text);
+					} else {
+						const BASE64 = 'base64,'
+						const base64 = url.substring(url.indexOf(BASE64) + BASE64.length)
+						resolve(Base64.base64ToArrayBuffer(base64))
+					}
+				} catch (ex) {
+					console.error(ex)
+					reject(ex)
+				}
+			})
+		}
 		if (url.startsWith('data:')) {
 			return new Promise((resolve, reject) => {
 				try {
@@ -64,6 +82,7 @@ export default class Response {
 		}
 		if (!url.startsWith("blob:") &&
 			!url.startsWith("data:") &&
+			!url.startsWith("mini:") &&
 			!url.startsWith("http://") &&
 			!url.startsWith("https://")) {
 			url = (Page.getApp().onekit_path || "") + url

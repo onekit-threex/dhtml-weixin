@@ -42,6 +42,24 @@ export default class XMLHttpRequest extends EventTarget {
 			}
 		};
 		var url = this._url
+		if (url.startsWith('mini:')) {
+			try {
+				var data
+				if (this._responseType == 'text') {
+					const MINI = 'mini:'
+					const text = url.substring(MINI.length)
+					data = text;
+				} else {
+					const BASE64 = 'base64,'
+					const base64 = url.substring(url.indexOf(BASE64) + BASE64.length)
+					data = Base64.base64ToArrayBuffer(base64)
+				}
+				callback.call(this, { data });
+			} catch (ex) {
+				console.error(ex);
+			}
+			return
+		}
 		if (url.startsWith('data:')) {
 			try {
 				const BASE64 = 'base64,'
@@ -71,6 +89,7 @@ export default class XMLHttpRequest extends EventTarget {
 		}
 		if (!url.startsWith("blob:") &&
 			!url.startsWith("data:") &&
+			!url.startsWith("mini:") &&
 			!url.startsWith("http://") &&
 			!url.startsWith("https://")) {
 			url = (Page.getApp().onekit_path || "") + url
