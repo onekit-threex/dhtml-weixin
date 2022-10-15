@@ -5,10 +5,16 @@ export default class Image extends EventTarget {
   constructor(canvas2d) {
     super();
 		this.isOffscreen = canvas2d && canvas2d.isOffscreenCanvas
-		var canvas = canvas2d || Page.current.canvas.wx_element;
-    if(!canvas){
-			canvas = Page.getApp().canvas
-		}
+		var canvas = canvas2d;
+    if (!canvas && Page.current) {
+      canvas = Page.current.canvas
+    }
+    if (!canvas && Page.getApp()) {
+      canvas = Page.getApp().canvas
+    }
+    if (canvas && canvas.wx_element) {
+      canvas = canvas.wx_element
+    }
     this.image = canvas.createImage();
     this.image.onload = () => {
       if (this.onload) {

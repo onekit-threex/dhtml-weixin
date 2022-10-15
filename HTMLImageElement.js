@@ -2,14 +2,20 @@ import Base64 from "./core/Base64";
 import Page from "./core/Page"
 import HTMLElement from "./HTMLElement"
 export default class HTMLImageElement extends HTMLElement {
-  constructor(canvas2d) { 
-       super();
-       this.isOffscreen = canvas2d && canvas2d.isOffscreenCanvas
-       var canvas = canvas2d || Page.current.canvas.wx_element;
-       if(!canvas){
-        canvas = Page.getApp().canvas
-      }
-            this.image = canvas.createImage();
+  constructor(canvas2d) {
+    super();
+    this.isOffscreen = canvas2d && canvas2d.isOffscreenCanvas
+    var canvas = canvas2d
+    if (!canvas && Page.current) {
+      canvas = Page.current.canvas
+    }
+    if (!canvas && Page.getApp()) {
+      canvas = Page.getApp().canvas
+    }
+    if (canvas && canvas.wx_element) {
+      canvas = canvas.wx_element
+    }
+    this.image = canvas.createImage();
     this.image.onload = () => {
       if (this.onload) {
         this.onload.call(this);
@@ -31,31 +37,31 @@ export default class HTMLImageElement extends HTMLElement {
       }
     };
   }
-  get width () {
+  get width() {
     return this.image.width;
   }
-  get height () {
+  get height() {
     return this.image.height;
   }
-  get data () {
+  get data() {
     return this.image.data;
   }
-  get complete () {
+  get complete() {
     return this.image.complete;
   }
-  set crossOrigin (crossOrigin) {
+  set crossOrigin(crossOrigin) {
     this._crossOrigin = crossOrigin;
   }
 
-  get crossOrigin () {
+  get crossOrigin() {
     return this._crossOrigin;
   }
 
-  set src (url) {
+  set src(url) {
     const onekit_debug = Page.getApp().onekit_debug
     if (onekit_debug) {
       if (url.startsWith("data:")) {
-        console[onekit_debug]("[HTMLImageElement]", "blob",url);
+        console[onekit_debug]("[HTMLImageElement]", "blob", url);
       } else {
         console[onekit_debug]("[HTMLImageElement]", url);
       }
@@ -69,7 +75,7 @@ export default class HTMLImageElement extends HTMLElement {
       try {
         this._src = url;
         var global = Page.current
-        if(!global){
+        if (!global) {
           global = Page.getApp()
         }
         const arrayBuffer = global.DataURL[url].array[0]
@@ -92,7 +98,7 @@ export default class HTMLImageElement extends HTMLElement {
     this.image.src = url;
   }
 
-  get src () {
+  get src() {
     return this._src;
   }
 }
