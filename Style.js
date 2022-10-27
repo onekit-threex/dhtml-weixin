@@ -1,5 +1,5 @@
 "use strict";
-/* eslint-disable class-methods-use-this */
+
 import String from "./core/String";
 import Page from "./core/Page"
 function fix(value){

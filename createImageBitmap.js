@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+
 import HTMLImageElement from "./HTMLImageElement";
 import Base64 from "./core/Base64";
 import Blob from "./Blob";

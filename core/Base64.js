@@ -2,9 +2,9 @@
 /* eslint-disable no-useless-escape */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable no-var */
-/* eslint-disable no-mixed-operators */
+
 /* eslint-disable vars-on-top */
-/* eslint-disable no-bitwise */
+
 import btoa from "../btoa"
 function b64ToUint6(nChr) {
   return nChr > 64 && nChr < 91

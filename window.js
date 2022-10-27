@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable getter-return */
-/* eslint-disable class-methods-use-this */
+
 import HTMLElement from './HTMLElement'
 import URL from './URL'
 import Performance from './Performance'

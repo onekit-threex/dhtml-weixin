@@ -1,20 +1,10 @@
-/* eslint-disable */
-/*
- * DOM Level 2
- * Object DOMException
- * @see http://www.w3.org/TR/REC-DOM-Level-1/ecma-script-language-binding.html
- * @see http://www.w3.org/TR/2000/REC-DOM-Level-2-Core-20001113/ecma-script-binding.html
- */
 import CSSStyleDeclaration from "../../CSSStyleDeclaration"
 function copy(src, dest) {
   for (const p in src) {
     dest[p] = src[p]
   }
 }
-/**
-^\w+\.prototype\.([_\w]+)\s*=\s*((?:.*\{\s*?[\r\n][\s\S]*?^})|\S.*?(?=[;\r\n]));?
-^\w+\.prototype\.([_\w]+)\s*=\s*(\S.*?(?=[;\r\n]));?
- */
+
 function _extends(Class, Super) {
   let pt = Class.prototype
   if (!(pt instanceof Super)) {
@@ -1268,4 +1258,4 @@ try {
 // if(typeof require == 'function'){
 exports.DOMImplementation = DOMImplementation
 exports.XMLSerializer = XMLSerializer
-// }
+

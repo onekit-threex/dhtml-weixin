@@ -249,6 +249,4 @@
 		"x-mac-cyrillic": []
 	};
 
-	// For strict environments where `this` inside the global scope
-	// is `undefined`, take a pure object instead
 }(this || {}));

@@ -241,4 +241,3 @@ exports.entityMap = {
   hearts: '♥',
   diams: '♦'
 }
-// for(var  n in exports.entityMap){console.log(exports.entityMap[n].charCodeAt())}
