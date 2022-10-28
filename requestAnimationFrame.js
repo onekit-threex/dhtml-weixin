@@ -6,8 +6,8 @@ export default function requestAnimationFrame(callback,canvas) {
   if (!canvas && Page.getApp()) {
     canvas = Page.getApp().canvas
   }
-  if (canvas && canvas.wx_element) {
-    canvas = canvas.wx_element
+  if (canvas && canvas.mini_element) {
+    canvas = canvas.mini_element
   }
   const requestId = canvas.requestAnimationFrame(callback)
   return requestId

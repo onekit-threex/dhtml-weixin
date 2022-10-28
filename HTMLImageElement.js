@@ -12,8 +12,8 @@ export default class HTMLImageElement extends HTMLElement {
     if (!canvas && Page.getApp()) {
       canvas = Page.getApp().canvas
     }
-    if (canvas && canvas.wx_element) {
-      canvas = canvas.wx_element
+    if (canvas && canvas.mini_element) {
+      canvas = canvas.mini_element
     }
     this.image = canvas.createImage();
     this.image.onload = () => {

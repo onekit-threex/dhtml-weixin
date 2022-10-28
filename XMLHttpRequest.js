@@ -2,14 +2,14 @@
 import EventTarget from "./EventTarget";
 import Page from "./core/Page"
 
-function run(cb, wx_object) {
+function run(cb, mini_object) {
 	return new Promise((resolve, reject) => {
-		wx_object.success = resolve;
-		wx_object.fail = (e) => {
+		mini_object.success = resolve;
+		mini_object.fail = (e) => {
 			console.error("[XMLHttpRequest]", e)
 			reject(e)
 		};
-		cb(Page.wx_request(wx_object));
+		cb(Page.mini_request(mini_object));
 	});
 }
 export default class XMLHttpRequest extends EventTarget {
@@ -94,7 +94,7 @@ export default class XMLHttpRequest extends EventTarget {
 			!url.startsWith("https://")) {
 			url = (Page.getApp().onekit_path || "") + url
 		}
-		const wx_object = {
+		const mini_object = {
 			url,
 			dataType: "text",
 			responseType: this._responseType,
@@ -102,16 +102,16 @@ export default class XMLHttpRequest extends EventTarget {
 			data: body,
 		};
 		if (this._async) {
-			wx_object.success = (res) => {
+			mini_object.success = (res) => {
 				callback.call(this, res);
 			};
-			wx_object.fail = console.error
-			this._task = Page.wx_request(wx_object);
+			mini_object.fail = console.error
+			this._task = Page.mini_request(mini_object);
 		} else {
 			try {
 				const res = await run((task) => {
 					this._task = task;
-				}, wx_object);
+				}, mini_object);
 				callback.call(this, res);
 			} catch (ex) {
 				console.error(ex);

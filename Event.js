@@ -1,16 +1,16 @@
 export default class Event {
     
-    static fix(wx_e){
-        //console.error(wx_e)
-        const web_e = new Event(wx_e.type)
+    static fix(mini_e){
+        //console.error(mini_e)
+        const web_e = new Event(mini_e.type)
         ///////////////////////////////////
         web_e.isTrusted = true
         web_e.altKey =false
         web_e.altitudeAngle =1.5707963267948966
         web_e.azimuthAngle =0
         web_e.bubbles =true
-        web_e.button = ["touchstart","touchend"].includes(wx_e.type)? 0:-1
-        web_e.buttons =["touchstart","touchend"].includes(wx_e.type)? 0:1
+        web_e.button = ["touchstart","touchend"].includes(mini_e.type)? 0:-1
+        web_e.buttons =["touchstart","touchend"].includes(mini_e.type)? 0:1
         web_e.cancelBubble =false
         web_e.cancelable =true
         web_e.composed =true
@@ -46,13 +46,13 @@ export default class Event {
         ///////////////////////////////////
         web_e.code = "";
         //
-        if(wx_e.changedTouches.length>0){
-            const touch = wx_e.changedTouches[0]
+        if(mini_e.changedTouches.length>0){
+            const touch = mini_e.changedTouches[0]
             web_e.pointerId = touch.identifier || 2;
             web_e.pageX = touch.x;
             web_e.pageY = touch.y;
-            web_e.clientX = touch.x-wx_e.currentTarget.offsetLeft;
-            web_e.clientY = touch.y-wx_e.currentTarget.offsetTop;
+            web_e.clientX = touch.x-mini_e.currentTarget.offsetLeft;
+            web_e.clientY = touch.y-mini_e.currentTarget.offsetTop;
             //
             web_e.layerX = web_e.clientX;
             web_e.layerY = web_e.clientY;

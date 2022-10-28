@@ -90,7 +90,7 @@ export default class Response {
 
 		// /////////////////////////
 		return new Promise((resolve, reject) => {
-			Page.wx_request({
+			Page.mini_request({
 				url,
 				headers: ((this.request.options || {}).headers || {}).data || {},
 				responseType,

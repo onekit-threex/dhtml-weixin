@@ -1,27 +1,27 @@
 import HTMLElement from "./HTMLElement";
 export default class HTMLCanvasElement extends HTMLElement {
-  constructor(wx_element) {
-    super(wx_element);
+  constructor(mini_element) {
+    super(mini_element);
   }
   get width() {
-    return this.wx_element.width;
+    return this.mini_element.width;
   }
   set width(width) {
-    this.wx_element.width = width;
+    this.mini_element.width = width;
   }
   get height() {
-    return this.wx_element.height;
+    return this.mini_element.height;
   }
   set height(height) {
-    this.wx_element.height = height;
+    this.mini_element.height = height;
   }
   getContext(type, attrs) {
     if (!["2d", "webgl"].includes(type)) {
       return null;
     }
-    return this.wx_element.getContext(type, attrs);
+    return this.mini_element.getContext(type, attrs);
   }
   toDataURL( type,  encoderOptions){
-    return this.wx_element.toDataURL(type, encoderOptions); 
+    return this.mini_element.toDataURL(type, encoderOptions); 
   }
 }

@@ -4,11 +4,11 @@ import Base64 from "./Base64";
 import Blob from "../Blob";
 export default class Canvas {
   static fix (canvas, canvas_image) {
-    if (canvas.wx_element) {
-      canvas = canvas.wx_element;
+    if (canvas.mini_element) {
+      canvas = canvas.mini_element;
     }
-    if (canvas_image.wx_element) {
-      canvas_image = canvas_image.wx_element;
+    if (canvas_image.mini_element) {
+      canvas_image = canvas_image.mini_element;
     }
     return new Promise((callback, reject) => {
       try {
@@ -29,11 +29,11 @@ export default class Canvas {
     });
   }
   static toImage (canvas, canvas_image) {
-    if (canvas.wx_element) {
-      canvas = canvas.wx_element;
+    if (canvas.mini_element) {
+      canvas = canvas.mini_element;
     }
-    if (canvas_image.wx_element) {
-      canvas_image = canvas_image.wx_element;
+    if (canvas_image.mini_element) {
+      canvas_image = canvas_image.mini_element;
     }
     return new Promise((callback, reject) => {
       try {
