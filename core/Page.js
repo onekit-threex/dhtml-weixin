@@ -17,11 +17,11 @@ export default class Page{
             return requireMiniProgram().getApp()
         }
     }
-    static get mini_request(){
+    static get wx_request(){
         if(typeof requireMiniProgram =="undefined"){
             return wx.request
         }else{
-            return requireMiniProgram().mini_request()
+            return requireMiniProgram().wx_request()
         }
     }
 }

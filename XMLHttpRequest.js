@@ -9,7 +9,7 @@ function run(cb, mini_object) {
 			console.error("[XMLHttpRequest]", e)
 			reject(e)
 		};
-		cb(Page.mini_request(mini_object));
+		cb(Page.wx_request(mini_object));
 	});
 }
 export default class XMLHttpRequest extends EventTarget {
@@ -106,7 +106,7 @@ export default class XMLHttpRequest extends EventTarget {
 				callback.call(this, res);
 			};
 			mini_object.fail = console.error
-			this._task = Page.mini_request(mini_object);
+			this._task = Page.wx_request(mini_object);
 		} else {
 			try {
 				const res = await run((task) => {
