@@ -28,6 +28,21 @@ npm i dhtml-weixin
 
 3. 小程序开发工具顶部主菜单->工具->构建npm。
 
+#### 使用教程
+1. 导入需要的类
+
+```
+import {window,document} from 'dhtml-weixin'
+```
+
+2. 使用API
+
+```
+console.error(window.innerWidth, window.innerHeight)
+```
+
+
+
 #### 参与贡献
 
 1.  Fork 本仓库
