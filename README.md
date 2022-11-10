@@ -1,5 +1,4 @@
-![ThreeX](ThreeX.jpg)
-# ThreeX
+# DHTML-WEIXIN
 
 #### 介绍
 ThreeX，全平台Three.JS原生引擎。本项目是Three.JS的微信小程序原生移植版本。完美效果，完美移植。
