@@ -135,7 +135,7 @@ export default class Event {
 	static touch2touch(offsetLeft, offsetTop, touch, web_e, pixelRatio = 1) {
 		web_e.pointerId = touch.identifier != null ? touch.identifier : 2;
 		web_e.identifier = touch.identifier;
-		console.error(platform)
+	//	console.error(platform)
 		if (platform == "devtools") {
 			web_e.pageX = touch.x * pixelRatio;
 			web_e.pageY = touch.y * pixelRatio;
