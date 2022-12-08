@@ -25,6 +25,7 @@ import EventTarget from "./EventTarget";
 import Element from "./Element";
 import Node from "./Node";
 import Event from "./Event";
+import Event0 from "./Event0";
 import Performance from "./Performance";
 import btoa from "./btoa"
 import ImageData from "./ImageData"
@@ -58,6 +59,7 @@ module.exports = {
   navigator,
   Node,
   Event,
+  Event0,
   Request,
   requestAnimationFrame,
   cancelAnimationFrame,
