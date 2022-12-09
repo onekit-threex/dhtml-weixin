@@ -13,17 +13,15 @@ export default class Document extends HTMLElement {
   constructor() {
     super();
     this.window = window;
+    this.body = new Body();
+    this.pointerLockElement = this.body
   }
 
-  get body () {
-    return new Body();
-  }
-
-  get head () {
+  get head() {
     return new Head();
   }
 
-  async createElementAsync (nodeName, canvasType = "2d", THIS) {
+  async createElementAsync(nodeName, canvasType = "2d", THIS) {
     switch (nodeName) {
       case "canvas":
         return new Promise((resolve) => {
@@ -45,7 +43,7 @@ export default class Document extends HTMLElement {
     }
   }
 
-  async getElementByIdAsync (id, canvasType = "2d", THIS) {
+  async getElementByIdAsync(id, canvasType = "2d", THIS) {
     return new Promise((resolve) => {
       const query = wx.createSelectorQuery();
       if (THIS) {
@@ -61,7 +59,7 @@ export default class Document extends HTMLElement {
     });
   }
 
-  async getElementsByTagNameAsync (tagName, canvasType = "2d", THIS) {
+  async getElementsByTagNameAsync(tagName, canvasType = "2d", THIS) {
     return new Promise((resolve) => {
       const query = wx.createSelectorQuery();
       if (THIS) {
@@ -77,7 +75,7 @@ export default class Document extends HTMLElement {
     });
   }
 
-  async getElementsByClassNameAsync (className, canvasType = "2d", THIS) {
+  async getElementsByClassNameAsync(className, canvasType = "2d", THIS) {
     return new Promise((resolve) => {
       const query = wx.createSelectorQuery();
       if (THIS) {
@@ -93,7 +91,7 @@ export default class Document extends HTMLElement {
     });
   }
 
-  createElement (nodeName, canvasType = "2d") {
+  createElement(nodeName, canvasType = "2d") {
     switch (nodeName) {
       case "canvas":
         return new HTMLCanvasElement(wx.createOffscreenCanvas({ type: canvasType }));
@@ -104,35 +102,35 @@ export default class Document extends HTMLElement {
     }
   }
 
-  createElementNS (namesspace, nodeName, canvasType) {
+  createElementNS(namesspace, nodeName, canvasType) {
     return this.createElement(nodeName, canvasType);
   }
 
-  get documentElement () {
+  get documentElement() {
     return new HTMLElement();
   }
 
-  getElementById () {
+  getElementById() {
     return new HTMLElement();
   }
 
-  getElementsByTagName () {
+  getElementsByTagName() {
     return [];
   }
 
-  getElementsByClassName () {
+  getElementsByClassName() {
     return [];
   }
 
-  querySelector () {
+  querySelector() {
     return new HTMLElement();
   }
 
-  get location () {
+  get location() {
     return new Location();
   }
 
-  querySelectorAll () {
+  querySelectorAll() {
     return [];
   }
 }
