@@ -6,6 +6,7 @@ import fetch from "./fetch";
 import Headers from "./Headers";
 import Image from "./Image";
 import HTMLImageElement from "./HTMLImageElement";
+import HTMLElement from "./HTMLElement"
 import HTMLCanvasElement from "./HTMLCanvasElement"
 import ImageBitmap from "./ImageBitmap"
 import navigator from "./navigator";
@@ -53,6 +54,7 @@ module.exports = {
   fetch,
   Headers,
   HTMLCanvasElement,
+  HTMLElement,
   HTMLImageElement,
   ImageBitmap,
   location,
