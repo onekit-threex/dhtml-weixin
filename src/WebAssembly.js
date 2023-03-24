@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   compile: WXWebAssembly.compile,
 
   compileStreaming: WXWebAssembly.compileStreaming,

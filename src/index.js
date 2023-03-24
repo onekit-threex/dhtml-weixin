@@ -16,7 +16,7 @@ import cancelAnimationFrame from "./cancelAnimationFrame";
 import Response from "./Response";
 import URL from "./URL";
 import Window from "./window";
-const WebAssembly = require("./WebAssembly");
+import WebAssembly from "./WebAssembly";
 import Worker from "./Worker";
 import XMLHttpRequest from "./XMLHttpRequest";
 import Location from "./Location";
@@ -37,7 +37,7 @@ const document = new Document();
 const window = new Window();
 const self = window;
 const location = new Location();
-module.exports = {
+export default {
   Image,
   TextDecoder,
   AudioContext,
@@ -73,4 +73,4 @@ module.exports = {
   Worker,
   XMLHttpRequest,
   core,
-};
+}

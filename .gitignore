@@ -1,0 +1,51 @@
+.DS_Store
+*.swp
+.project
+.idea/
+.vscode/
+npm-debug.log
+.jshintrc
+.vs/
+
+# The command'npm install --prefix test' adds files in the test folder (https://docs.npmjs.com/configuring-npm/folders.html#executables).
+# There are 2 kinds of files, those without extension and those with cmd extension.
+# To ignore files without a extension, following procedure is nessecary:
+# - ignore all files in the test folder
+# - unignore all files in subdirectories of the test folder
+# - unignore all files with an extension in the test folder
+test/*
+!test/*/
+!test/*.*
+test/*.cmd
+test/unit/build
+test/treeshake/index.bundle.js
+test/treeshake/index.bundle.min.js
+test/treeshake/index-src.bundle.min.js
+test/treeshake/stats.html
+
+glasses/package-lock.json
+build/dhtml-weixin.min.js
+**/node_modules
+build/dhtml-weixin.min.js
+
+miniprogram_dev/miniprogram_npm/dhtml-weixin/index.js.map
+miniprogram_dev/miniprogram_npm/dhtml-weixin/index.js
+miniprogram_dev/miniprogram_npm/pako/index.js
+miniprogram_dev/package-lock.json
+miniprogram_dev/miniprogram_npm/oneutil/index.js
+miniprogram_dev/miniprogram_npm/oneutil/index.js.map
+miniprogram_dev/miniprogram_npm/dhtml-weixin/index.js
+miniprogram_dev/miniprogram_npm/dhtml-weixin/index.js.map
+miniprogram_dev/miniprogram_npm/pako/index.js.map
+
+ThreeX/miniprogram/node_modules
+ThreeX/miniprogram/miniprogram_npm
+ThreeX/plugin/node_modules
+ThreeX/plugin/miniprogram_npm
+
+ThreePro/miniprogram/node_modules
+ThreePro/miniprogram/miniprogram_npm
+ThreePro/plugin/node_modules
+ThreePro/plugin/miniprogram_npm
+miniprogram_dev/project.private.config.json
+ThreeAR/plugin/miniprogram_npm/dhtml-weixin/index.js

@@ -1,8 +1,9 @@
 //import encoding from './core/encoding/encoding.js'
 //module.exports = encoding.TextDecoder
-class TextDecoder{
-    decode(array){
-  
+class TextDecoder {
+
+	decode( array ) {
+
 		let s = '';
 
 		for ( let i = 0, il = array.length; i < il; i ++ ) {
@@ -23,6 +24,8 @@ class TextDecoder{
 			return s;
 
 		}
-    }
+
+	}
+
 }
-module.exports = TextDecoder
+export default TextDecoder;
