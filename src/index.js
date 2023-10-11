@@ -32,6 +32,7 @@ import btoa from "./btoa"
 import ImageData from "./ImageData"
 import AudioContext from "./AudioContext"
 import TextDecoder from "./TextDecoder"
+import WebGL2RenderingContext from "./WebGL2RenderingContext"
 const performance = new Performance();
 const document = new Document();
 const window = new Window();
@@ -72,5 +73,6 @@ export default {
   WebAssembly,
   Worker,
   XMLHttpRequest,
+  WebGL2RenderingContext,
   core,
 }

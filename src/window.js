@@ -18,6 +18,7 @@ import AudioContext from "./AudioContext"
 import ImageData from "./ImageData"
 import Event from "./Event"
 import TextDecoder from "./TextDecoder"
+import WebGL2RenderingContext from "./WebGL2RenderingContext"
 // ///////////////////////////////////////////////
 
 export default class Window extends HTMLElement {
@@ -146,6 +147,9 @@ export default class Window extends HTMLElement {
     return localStorage
   }
 
+  get WebGL2RenderingContext(){
+    return WebGL2RenderingContext
+  }
   postMessage (json) {
     return Worker.self_postMessage(json)
   }

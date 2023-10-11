@@ -16,7 +16,7 @@ export default class HTMLCanvasElement extends HTMLElement {
     this.mini_element.height = height;
   }
   getContext(type, attrs) {
-    if (!["2d", "webgl"].includes(type)) {
+    if (!["2d", "webgl","webgl2"].includes(type)) {
       return null;
     }
     return this.mini_element.getContext(type, attrs);
