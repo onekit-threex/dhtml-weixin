@@ -823,6 +823,9 @@ Document.prototype.getElementsByTagName =
 Document.prototype.getElementsByTagNameNS =
 	Element.prototype.getElementsByTagNameNS;
 Element.prototype.querySelectorAll = function (selector) {
+	
+	if (selector.startsWith("[") && selector.endsWith("]")) {
+	
 	return new LiveNodeList(this, function (base) {
 		const ls = [];
 		_visitNode(base, function (node) {
@@ -848,6 +851,21 @@ Element.prototype.querySelectorAll = function (selector) {
 		});
 		return ls;
 	});
+}else{
+	const paths = selector.split(" ")
+	let parents = [this]
+	for (const path of paths) {
+	  const temp = []
+	  for (const parent of parents) {
+		const children = parent.getElementsByTagName(path)
+		for (var i = 0; i < children.length; i++) {
+		  temp.push(children[i])
+		}
+	  }
+	  parents = temp.concat();
+	}
+	return parents
+}
 };
 Element.prototype.querySelector = function (selector) {
 	return this.querySelectorAll(selector)[0];
