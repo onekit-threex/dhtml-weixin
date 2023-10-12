@@ -523,6 +523,7 @@ function _insertBefore(parentNode, newChild, nextChild) {
 	}
 	do {
 		newFirst.parentNode = parentNode;
+		newFirst.parentElement = parentNode;
 	} while (newFirst !== newLast && (newFirst = newFirst.nextSibling));
 	_onUpdateChild(parentNode.ownerDocument || parentNode, parentNode);
 	// console.log(parentNode.lastChild.nextSibling == null)
@@ -540,6 +541,7 @@ function _appendSingleChild(parentNode, newChild) {
 	}
 	var pre = parentNode.lastChild;
 	newChild.parentNode = parentNode;
+	newChild.parentElement = parentNode;
 	newChild.previousSibling = pre;
 	newChild.nextSibling = null;
 	if (pre) {
@@ -740,6 +742,8 @@ Element.prototype = {
 		const value = newAttr.value;
 		if (newAttr.name == "style") {
 			this.style = CSSStyleDeclaration.parse(value);
+		}else if(newAttr.name=="id"){
+			this.id = value
 		}
 		this.attributes[newAttr.name] = {
 			value,
@@ -832,16 +836,14 @@ Element.prototype.querySelectorAll = function (selector) {
 						(value.startsWith('"') && value.endsWith('"')) ||
 						(value.startsWith("'") && value.endsWith("'"))
 					) {
-						value = value.substr(1,value.length - 2);
+						value = value.substr(1, value.length - 2);
 					}
-          //console.error(selector,selectorString,key,value)
 					if (node.getAttribute(key) == value) {
 						ls.push(node);
 					}
 				} else {
 					throw new Error(selector);
 				}
-				ls.push(node);
 			}
 		});
 		return ls;
@@ -1184,6 +1186,7 @@ function importNode(doc, node, deep) {
 	}
 	node2.ownerDocument = doc;
 	node2.parentNode = null;
+	node2.parentElement = null;
 	if (deep) {
 		let child = node.firstChild;
 		while (child) {
