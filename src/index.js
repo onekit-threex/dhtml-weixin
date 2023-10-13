@@ -33,12 +33,14 @@ import ImageData from "./ImageData"
 import AudioContext from "./AudioContext"
 import TextDecoder from "./TextDecoder"
 import WebGL2RenderingContext from "./WebGL2RenderingContext"
+import MediaQueryList from "./MediaQueryList"
 const performance = new Performance();
 const document = new Document();
 const window = new Window();
 const self = window;
 const location = new Location();
 export default {
+  MediaQueryList,
   Image,
   TextDecoder,
   AudioContext,

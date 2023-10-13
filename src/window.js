@@ -19,9 +19,16 @@ import ImageData from "./ImageData"
 import Event from "./Event"
 import TextDecoder from "./TextDecoder"
 import WebGL2RenderingContext from "./WebGL2RenderingContext"
+import MediaQueryList from "./MediaQueryList"
 // ///////////////////////////////////////////////
 
 export default class Window extends HTMLElement {
+  matchMedia(){
+    return new MediaQueryList();
+  }
+  get MediaQueryList(){
+    return MediaQueryList
+  }
     get TextDecoder(){
         return TextDecoder
     }

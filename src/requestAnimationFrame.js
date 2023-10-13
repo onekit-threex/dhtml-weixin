@@ -9,6 +9,9 @@ export default function requestAnimationFrame(callback,canvas) {
   if (canvas && canvas.mini_element) {
     canvas = canvas.mini_element
   }
+  if(!canvas){
+    return 0
+  }
   const requestId = canvas.requestAnimationFrame(callback)
   return requestId
 }
