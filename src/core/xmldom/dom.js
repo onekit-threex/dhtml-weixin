@@ -92,21 +92,25 @@ copy(ExceptionCode, DOMException);
  * The NodeList interface provides the abstraction of an ordered collection of nodes, without defining or constraining how this collection is implemented. NodeList objects in the DOM are live.
  * The items in the NodeList are accessible via an integral index, starting from 0.
  */
+
 function NodeList() {}
 NodeList.prototype = {
-	/**
-	 * The number of nodes in the list. The range of valid child node indices is 0 to length-1 inclusive.
-	 * @standard level1
-	 */
+	[Symbol.iterator](){
+		let index = 0
+		return {
+		  next: () => {
+			if (index < this.length) {
+			  return { done: false, value: this[index++] }
+			} else {
+			  return { done: true, value: undefined }
+			}
+		  },
+		  return: () => {    
+			return { done: true, value: undefined }
+		  }
+		}
+	},
 	length: 0,
-	/**
-	 * Returns the indexth item in the collection. If index is greater than or equal to the number of nodes in the list, this returns null.
-	 * @standard level1
-	 * @param index  unsigned long
-	 *   Index into the collection.
-	 * @return Node
-	 * 	The node at the indexth position in the NodeList, or null if that is not a valid index.
-	 */
 	item(index) {
 		return this[index] || null;
 	},
@@ -117,6 +121,7 @@ NodeList.prototype = {
 		return buf.join("");
 	},
 };
+
 function LiveNodeList(node, refresh) {
 	this._node = node;
 	this._refresh = refresh;
@@ -275,6 +280,7 @@ DOMImplementation.prototype = {
 		const doc = new Document();
 		doc.implementation = this;
 		doc.childNodes = new NodeList();
+		doc.children = new NodeList();
 		doc.doctype = doctype;
 		if (doctype) {
 			doc.appendChild(doctype);
@@ -317,6 +323,7 @@ Node.prototype = {
 	attributes: null,
 	parentNode: null,
 	childNodes: null,
+	children: null,
 	ownerDocument: null,
 	nodeValue: null,
 	namespaceURI: null,
@@ -456,10 +463,14 @@ function _onRemoveAttribute(doc, el, newAttr, remove) {
 function _onUpdateChild(doc, el, newChild) {
 	if (doc && doc._inc) {
 		doc._inc++;
-		// update childNodes
+		// update_childNodes
 		const cs = el.childNodes;
+		const cs2 = el.children;
 		if (newChild) {
 			cs[cs.length++] = newChild;
+			if(newChild.nodeType==ELEMENT_NODE){
+				cs2[cs2.length++] = newChild;
+			}
 		} else {
 			// console.log(1)
 			let child = el.firstChild;
@@ -614,6 +625,7 @@ Document.prototype = {
 		node.nodeName = tagName;
 		node.tagName = tagName;
 		node.childNodes = new NodeList();
+		node.children = new NodeList();
 		const attrs = (node.attributes = new NamedNodeMap());
 		attrs._ownerElement = node;
 		return node;
@@ -622,6 +634,7 @@ Document.prototype = {
 		const node = new DocumentFragment();
 		node.ownerDocument = this;
 		node.childNodes = new NodeList();
+		node.children = new NodeList();
 		return node;
 	},
 	createTextNode(data) {
@@ -670,6 +683,7 @@ Document.prototype = {
 		const pl = qualifiedName.split(":");
 		const attrs = (node.attributes = new NamedNodeMap());
 		node.childNodes = new NodeList();
+		node.children = new NodeList();
 		node.ownerDocument = this;
 		node.nodeName = qualifiedName;
 		node.tagName = qualifiedName;
@@ -1227,6 +1241,9 @@ function cloneNode(doc, node, deep) {
 	}
 	if (node.childNodes) {
 		node2.childNodes = new NodeList();
+	}
+	if (node.children) {
+		node2.children = new NodeList();
 	}
 	node2.ownerDocument = doc;
 	switch (node2.nodeType) {
