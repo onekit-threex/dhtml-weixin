@@ -17,6 +17,8 @@ export default class HTMLImageElement extends HTMLElement {
     }
     this.image = canvas.createImage();
     this.image.onload = () => {
+      this.naturalWidth = this.width 
+      this.naturalHeight = this.height
       if (this.onload) {
         this.onload.call(this);
       }
