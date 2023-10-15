@@ -12,7 +12,12 @@ export default class HTMLElement extends Element {
     this._childNodes = [];
     this.textContent = "";
   }
+  focus(){
 
+  }
+  blur(){
+    
+  }
   get ownerDocument() {
     var document = new HTMLElement()
     document.documentElement =new HTMLElement() 

@@ -6,4 +6,5 @@ export default class Element extends Node {
   constructor() {
     super()
   }
+  
 }

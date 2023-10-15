@@ -20,6 +20,7 @@ import Event from "./Event"
 import TextDecoder from "./TextDecoder"
 import WebGL2RenderingContext from "./WebGL2RenderingContext"
 import MediaQueryList from "./MediaQueryList"
+import HTMLVideoElement from "./HTMLVideoElement"
 // ///////////////////////////////////////////////
 
 export default class Window extends HTMLElement {
@@ -28,6 +29,9 @@ export default class Window extends HTMLElement {
   }
   get MediaQueryList(){
     return MediaQueryList
+  }
+  get HTMLVideoElement(){
+    return HTMLVideoElement
   }
     get TextDecoder(){
         return TextDecoder

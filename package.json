@@ -2,13 +2,13 @@
   "name": "dhtml-weixin",
   "dependencies": {
   },
-  "version": "10.5.1",
+  "version": "10.7.5",
   "description": "JavaScript 3D library",
   "main": "./build/dhtml-weixin.min.js",
   "exports": {},
   "repository": {
     "type": "git",
-    "url": "https://gitee.com/onekit-game/dhtml-weixin-demo"
+    "url": "https://gitee.com/threejs/dhtml-weixin"
   },
   "sideEffects": false,
   "files": [
@@ -119,9 +119,9 @@
   "author": "mrdoob",
   "license": "MIT",
   "bugs": {
-    "url": "https://gitee.com/onekit-game/dhtml-weixin"
+    "url": "https://gitee.com/threejs/dhtml-weixin"
   },
-  "homepage": "https://gitee.com/onekit-game/dhtml-weixin/",
+  "homepage": "https://gitee.com/threejs/dhtml-weixin/",
   "devDependencies": {
     "@babel/core": "^7.18.9",
     "@babel/eslint-parser": "^7.18.9",
