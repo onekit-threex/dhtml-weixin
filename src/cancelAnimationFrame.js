@@ -7,6 +7,9 @@ export default function cancelAnimationFrame(requestId, canvas) {
 		if (!canvas && Page.current) {
 			canvas = Page.current.canvas
 		}
+		if (!canvas && Page.current && Page.current.$vm) {
+			canvas = Page.current.$vm.canvas
+		}
 		if (!canvas && Page.getApp()) {
 			canvas = Page.getApp().canvas
 		}
