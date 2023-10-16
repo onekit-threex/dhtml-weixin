@@ -119,6 +119,11 @@ export default class Window extends HTMLElement {
   get ImageBitmap () {
     return ImageBitmap
   }
+  get platform () {
+    this._getSystemInfoSync()
+    return this.onekit_systemInfo.platform
+  }
+
   get devicePixelRatio () {
     this._getSystemInfoSync()
     return this.onekit_systemInfo.pixelRatio
