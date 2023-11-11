@@ -30,4 +30,11 @@ export default class Page{
             return requireMiniProgram().wx_request()
         }
     }
+    static get wx_downloadFile(){
+        if(typeof requireMiniProgram =="undefined"){
+            return wx.downloadFile
+        }else{
+            return requireMiniProgram().wx_downloadFile()
+        }
+    }
 }

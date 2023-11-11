@@ -2,7 +2,7 @@
   "name": "dhtml-weixin",
   "dependencies": {
   },
-  "version": "10.10.2",
+  "version": "10.10.3",
   "description": "JavaScript 3D library",
   "main": "./build/dhtml-weixin.min.js",
   "exports": {},
