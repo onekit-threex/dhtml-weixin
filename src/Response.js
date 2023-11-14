@@ -1,24 +1,31 @@
 /* eslint-disable handle-callback-err */
 /* eslint-disable no-console */
+
 import Base64 from './core/Base64'
 import Page from './core/Page'
 import Blob from "./Blob"
+import TextDecoder from "./TextDecoder"
+
+// 读取blob为文本。
+function readBlobAsText(blob) {
+  return readArrayBufferAsText(blob.array[0])
+}
+ 
+function readArrayBufferAsText(buffer) {
+  return new TextDecoder().decode(buffer)
+}
+
+
 export default class Response {
 	constructor(body, options = {}, request) {
-		if (!request) {
-			this.body = body
-			this.status = options.status
-			this.statusText = options.statusText
-			this.headers = options.headers
-		}
-		if (typeof request == "string") {
-			this.request = {
-				url: request
-			}
-		} else {
-			this.request = request
-		}
-		this.status = 200
+		this.body = body
+		this.request = request
+		this.status = options.status
+		this.statusText = options.statusText
+		this._headers = options.headers
+	}
+	get headers() {
+		return this._headers
 	}
 
 	_run(responseType, dataType = 'text') {
@@ -63,11 +70,11 @@ export default class Response {
 			})
 		}
 		if (url.startsWith('blob:')) {
-			return new Promise((resolve,reject) => {
+			return new Promise((resolve, reject) => {
 				try {
 					var global = Page.current
-					if(!global){
-					  global = Page.getApp()
+					if (!global) {
+						global = Page.getApp()
 					}
 					const arrayBuffer = global.DataURL[url].array[0]
 					resolve(arrayBuffer)
@@ -90,20 +97,23 @@ export default class Response {
 
 		// /////////////////////////
 		return new Promise((resolve, reject) => {
-			Page.wx_request({
-				url,
-				headers: ((this.request.options || {}).headers || {}).data || {},
-				responseType,
-				dataType,
-				success: (res) => {
-					resolve(res.data)
-				},
-				fail: (e) => {
-					console.error('[fetch.fail]', this.request.url, e)
-					// eslint-disable-next-line prefer-promise-reject-errors
-					reject(null)
+			this.body.xhr.onload = async (e) => {
+				//console.error(this.body.xhr.response)
+				var data = this.body.xhr.response
+				switch (responseType) {
+					case "blob":
+						break
+					case "arraybuffer":
+						data = data.array[0]
+            break
+            case "text":
+              data = await readBlobAsText(data)
+              break
+					default:
+						throw new Error("?????????????????", responseType)
 				}
-			})
+				resolve(data)
+			}
 		})
 	}
 

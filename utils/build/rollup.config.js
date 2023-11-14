@@ -1,6 +1,7 @@
 import babel from '@rollup/plugin-babel';
 import { terser } from 'rollup-plugin-terser';
 import babelrc from './.babelrc.json';
+import commonjs from '@rollup/plugin-commonjs'
 
 export function glconstants() {
 
@@ -292,6 +293,7 @@ let builds = [
 			addons(),
 			glconstants(),
 			glsl(),
+			commonjs(),
 			header()
 		],
 		output: [
@@ -306,6 +308,7 @@ let builds = [
 		plugins: [
 			addons(),
 			glsl(),
+			commonjs(),
 			babel( {
 				babelHelpers: 'bundled',
 				compact: false,
@@ -335,6 +338,7 @@ let builds = [
 		plugins: [
 			addons(),
 			glconstants(),
+			commonjs(),
 			glsl(),
 			babel( {
 				babelHelpers: 'bundled',

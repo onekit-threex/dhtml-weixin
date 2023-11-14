@@ -1,2 +1,2 @@
 import encoding from './encoding/encoding.js'
-export default encoding.TextDecoder
+export default encoding.TextEncoder
