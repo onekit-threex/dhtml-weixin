@@ -1,6 +1,6 @@
 {
   "name": "dhtml-weixin",
-  "version": "11.3.1",
+  "version": "11.4.4",
   "description": "JavaScript 3D library",
   "main": "./build/dhtml-weixin.min.js",
   "exports": {},

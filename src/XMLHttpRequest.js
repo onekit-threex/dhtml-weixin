@@ -1,19 +1,17 @@
 /* eslint-disable camelcase */
+//import {EventTarget,core,Blob,ProgressEvent} from "dhtml-weixin"
+
 import EventTarget from "./EventTarget"
 import core from "./core/index"
 import Blob from "./Blob"
 import ProgressEvent from "./ProgressEvent"
 const {
-	Page
+	Page,
+	Base64 
 } = core
 
 function readArrayBuffer(size,filePath, resolve) {
 	const fs = wx.getFileSystemManager()
-/*	fs.getFileInfo({
-		filePath,
-		success({
-			size
-		}) {*/
 			const data = new ArrayBuffer(size)
 			fs.open({
 				filePath,
@@ -30,8 +28,6 @@ function readArrayBuffer(size,filePath, resolve) {
 				},
 				fail: console.error
 			})
-		//}
-	//})
 }
 
 function run(cb, mini_object) {
@@ -47,7 +43,8 @@ function run(cb, mini_object) {
 export default class XMLHttpRequest extends EventTarget {
 	constructor() {
 		super();
-		this._responseType = "text";
+    //this._responseType = "text";
+    this._responseHeaders = {}
 	}
 
 	open(method, url, async = true, user, password) {
@@ -67,7 +64,7 @@ export default class XMLHttpRequest extends EventTarget {
 				this._responseText = this._response;
 			} else if (this._responseType == "blob") {
 				this._response = new Blob([this._response])
-			}
+      }
 			if (this.onload) {
 				this.onload.apply(this);
 			}
@@ -79,6 +76,12 @@ export default class XMLHttpRequest extends EventTarget {
 		};
 		var url = this._url
 		if (url.startsWith('mini:')) {
+      this._status = 200
+      const loadStartEvent = {}
+      this.dispatchEvent(loadStartEvent)
+      if (this.onloadstart) {
+        this.onloadstart(loadStartEvent)
+      }
 			try {
 				var data
 				if (this._responseType == 'text') {
@@ -99,25 +102,42 @@ export default class XMLHttpRequest extends EventTarget {
 			return
 		}
 		if (url.startsWith('data:')) {
+      this._status = 200
+      const loadStartEvent = {}
+      this.dispatchEvent(loadStartEvent)
+      if (this.onloadstart) {
+        this.onloadstart(loadStartEvent)
+      }
 			try {
 				const BASE64 = 'base64,'
-				url = url.substring(url.indexOf(BASE64) + BASE64.length)
-				const data = Base64.base64ToArrayBuffer(url)
-				callback.call(this, {
-					data
-				});
+        url = url.substring(url.indexOf(BASE64) + BASE64.length)
+
+        const data = Base64.base64ToArrayBuffer(url)
+
+        callback.call(this, {
+          header:{},
+          data
+        });
 			} catch (ex) {
 				console.error(ex);
 			}
 			return
-		}
+    }
+
 		if (url.startsWith('blob:')) {
+      this._status = 200
+      const loadStartEvent = {}
+      this.dispatchEvent(loadStartEvent)
+      if (this.onloadstart) {
+        this.onloadstart(loadStartEvent)
+      }
 			try {
 				var global = Page.current
 				if (!global) {
 					global = Page.getApp()
 				}
-				const data = global.DataURL[url].array[0]
+        const data = global.DataURL[url].array[0]
+   
 				callback.call(this, {
 					data
 				});

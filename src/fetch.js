@@ -1,8 +1,11 @@
+
 import Blob from "./Blob"
 import FileReader from "./FileReader"
 import FormData from "./FormData"
-import XMLHttpRequest from "./XMLHttpRequest"
 import Response from "./Response"
+
+//import {Blob,FileReader,FormData,Response} from "dhtml-weixin"
+import XMLHttpRequest from "./XMLHttpRequest"
 const self = {
 	Blob,
 	FileReader,
@@ -436,7 +439,7 @@ export function fetch(input, init) {
 			xhr.withCredentials = false
 		}
 
-		if ('responseType' in xhr && support.blob) {
+		if (!xhr.responseType  && support.blob) {
       //console.error("??????????????????")
 			xhr.responseType = 'blob'
 		}
