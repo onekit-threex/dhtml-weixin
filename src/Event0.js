@@ -47,29 +47,43 @@ export default class Event0 {
 		//mini_e.view = ?
 		mini_e.which = 0;
 		mini_e.code = '';
-		if ( ! mini_e.touches || mini_e.touches.length <= 0 ) {
+		if ( mini_e.touches && mini_e.touches.length > 0 ) {
 
-			return mini_e;
+			const touch = mini_e.touches[ 0 ];
+			mini_e.pointerId = touch.identifier != null ? touch.identifier : 2;
+			mini_e.identifier = touch.identifier;
+			mini_e.pageX = touch.pageX;
+			mini_e.pageY = touch.pageY;
+			mini_e.clientX = touch.clientX;
+			mini_e.clientY = touch.clientY;
+			mini_e.x = touch.x;
+			mini_e.y = touch.y;
+			//
+			mini_e.layerX = mini_e.clientX;
+			mini_e.layerY = mini_e.clientY;
+			mini_e.deltaX = touch.offsetX;
+			mini_e.deltaY = touch.offsetY;
 
 		}
 
-		const touch = mini_e.touches[ 0 ];
-		const pixelRatio = 1;
-		mini_e.pointerId = touch.identifier != null ? touch.identifier : 2;
-		mini_e.identifier = touch.identifier;
-		mini_e.pageX = touch.pageX * pixelRatio;
-		mini_e.pageY = touch.pageY * pixelRatio;
-		mini_e.clientX = touch.clientX * pixelRatio;
-		mini_e.clientY = touch.clientY * pixelRatio;
-		mini_e.x = touch.x * pixelRatio;
-		mini_e.y = touch.y * pixelRatio;
-		mini_e.deltaX = touch.deltaX * pixelRatio;
-		mini_e.deltaY = touch.deltaY * pixelRatio;
-		//
-		mini_e.layerX = mini_e.clientX;
-		mini_e.layerY = mini_e.clientY;
-		mini_e.deltaX = mini_e.offsetX;
-		mini_e.deltaY = mini_e.offsetY;
+		if ( mini_e.changedTouches && mini_e.changedTouches.length > 0 ) {
+
+			const touch = mini_e.changedTouches[ 0 ];
+			mini_e.pointerId = touch.identifier != null ? touch.identifier : 2;
+			mini_e.identifier = touch.identifier;
+			mini_e.pageX = touch.pageX;
+			mini_e.pageY = touch.pageY;
+			mini_e.clientX = touch.clientX;
+			mini_e.clientY = touch.clientY;
+			mini_e.x = touch.x;
+			mini_e.y = touch.y;
+			//
+			mini_e.layerX = mini_e.clientX;
+			mini_e.layerY = mini_e.clientY;
+			mini_e.deltaX = touch.offsetX;
+			mini_e.deltaY = touch.offsetY;
+
+		}
 
 		///////////////////////
 		return mini_e;
